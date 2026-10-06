@@ -1,0 +1,252 @@
+{% extends "layouts/dashboard_base.html" %}
+
+{% block title %}
+Resume Studio | Novus
+{% endblock %}
+
+{% block styles %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/resume/resume.css') }}">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/resume/editor.css') }}">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/resume/preview.css') }}">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/resume/cards.css') }}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+{% endblock %}
+
+
+<!-- ==========================================================
+     REMOVE NORMAL DASHBOARD SIDEBAR
+========================================================== -->
+
+{% block dashboard_sidebar %}
+{% endblock %}
+
+
+<!-- ==========================================================
+     REMOVE NORMAL DASHBOARD TOPBAR
+========================================================== -->
+
+{% block dashboard_topbar %}
+{% endblock %}
+
+
+{% block dashboard_content %}
+
+
+<div class="resume-studio" data-resume-id="{{ resume.id }}">
+
+    <!-- ======================================================
+         RESUME STUDIO NAVIGATION DRAWER
+    ======================================================= -->
+
+    <div class="studio-nav-backdrop" id="studioNavBackdrop"></div>
+
+    <aside class="studio-nav-drawer" id="studioNavDrawer" aria-hidden="true">
+
+        <div class="studio-nav-drawer-header">
+
+            
+            <a href="{{ url_for('auth.dashboard') }}" class="studio-drawer-brand">
+            
+                <span class="studio-brand-icon">✦</span>
+            
+                <span>Novus</span>
+            
+            </a>
+
+            <button type="button" class="studio-nav-close" id="studioNavClose" aria-label="Close navigation">
+            
+                <i data-lucide="x"></i>
+            
+            </button>
+        
+        </div>
+
+        <nav class="studio-nav-menu" aria-label="Resume Studio navigation">
+        
+            <a href="{{ url_for('auth.dashboard') }}">
+        
+                <i data-lucide="layout-dashboard"></i>
+        
+                <span>Dashboard</span>
+        
+            </a>
+        
+            <a href="{{ url_for('resume.my_resumes') }}">
+        
+                <i data-lucide="file-text"></i>
+        
+                <span>My Resumes</span>
+        
+            </a>
+        
+            <a href="#" class="studio-nav-disabled">
+        
+                <i data-lucide="scan-search"></i>
+        
+                <span>ATS Analyzer</span>
+        
+            </a>
+        
+            <a href="#" class="studio-nav-disabled">
+        
+                <i data-lucide="bar-chart-3"></i>
+        
+                <span>Insights</span>
+        
+            </a>
+        
+            <a href="#" class="studio-nav-disabled">
+        
+                <i data-lucide="settings"></i>
+        
+                <span>Settings</span>
+        
+            </a>
+        
+        </nav>
+        
+        <div class="studio-nav-drawer-footer">
+        
+            <a href="{{ url_for('auth.logout') }}">
+        
+                <i data-lucide="log-out"></i>
+        
+                <span>Logout</span>
+        
+            </a>
+        
+        </div>
+    
+    </aside>
+
+    <!-- ======================================================
+         RESUME STUDIO HEADER
+    ======================================================= -->
+
+    {% include "resume/components/editor_header.html" %}
+
+
+    <!-- ======================================================
+         THREE COLUMN WORKSPACE
+    ======================================================= -->
+
+    <div class="studio-workspace">
+
+        <!-- ==================================================
+             LEFT — SECTION NAVIGATION
+        =================================================== -->
+
+        <aside class="studio-sections">
+
+            <div class="sections-panel">
+
+                {% include "resume/components/progress_panel.html" %}
+
+            </div>
+
+        </aside>
+
+        <!-- ==================================================
+             CENTER — RESUME EDITOR
+        =================================================== -->
+
+        <main class="studio-editor">
+
+            <div id="resumeSections" class="resume-sections">
+
+                {% include "resume/components/personal_info.html" %}
+
+                {% include "resume/components/summary.html" %}
+
+                {% include "resume/components/education.html" %}
+
+                {% include "resume/components/skills.html" %}
+
+                {% include "resume/components/projects.html" %}
+
+                {% include "resume/components/experience.html" %}
+
+                {% include "resume/components/certifications.html" %}
+
+            </div>
+
+        </main>
+
+        <!-- ==================================================
+             RIGHT — LIVE PREVIEW
+        =================================================== -->
+
+        <aside class="studio-preview">
+
+            <div class="preview-panel">
+
+                {% include "resume/components/preview.html" %}
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+
+
+<script src="{{ url_for('static', filename='js/resume/engine.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/resume/utils.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/resume/storage.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/resume/api.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/resume/autosave.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/resume/education.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/resume/skills.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/resume/projects.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/resume/experience.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/resume/certifications.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/resume/section_manager.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/resume/resume.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/resume/preview.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/resume/preview_mode.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/resume/completion.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/resume/studio_navigation.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/resume/download.js') }}"></script>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+
+<script>
+    lucide.createIcons();
+</script>
+
+
+{% endblock %}

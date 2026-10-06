@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Novus{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/variables.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    {% block styles %}{% endblock %}
+
+</head>
+
+<body>
+
+    {% block dashboard_layout %}
+
+    <div class="dashboard-layout">
+
+        {% block dashboard_sidebar %}
+
+        {% include "partials/sidebar.html" %}
+
+        {% endblock %}
+
+
+        <main class="dashboard-main">
+
+            {% block dashboard_topbar %}
+
+            {% include "partials/topbar.html" %}
+
+            {% endblock %}
+
+
+            {% block dashboard_content %}
+            {% endblock %}
+
+        </main>
+
+    </div>
+
+    {% endblock %}
+
+
+    {% block scripts %}{% endblock %}
+
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,212 @@
+{% extends "layouts/dashboard_base.html" %}
+
+{% block title %}Insights | Novus{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/insights.css') }}">
+{% endblock %}
+
+{% block dashboard_topbar %}
+{% endblock %}
+
+{% block dashboard_content %}
+
+<section class="insights-page">
+
+    <header class="page-header insights-header">
+        <div>
+            <span class="insights-eyebrow">ATS HISTORY</span>
+            <h1>Insights</h1>
+            <p>Review your previous resume analyses and reopen any saved report.</p>
+        </div>
+
+        <a class="btn btn-primary insights-new-btn" href="{{ url_for('analyzer.analyzer_page') }}">
+            <i data-lucide="scan-search"></i>
+            Analyze New Job
+        </a>
+    </header>
+
+    <section class="insights-summary" aria-label="ATS analysis summary">
+
+        <article class="insights-summary-card">
+            <div class="insights-summary-icon">
+                <i data-lucide="scan-search"></i>
+            </div>
+
+            <div class="insights-summary-content">
+                <span>Total Analyses</span>
+                <strong>{{ total_analyses }}</strong>
+                <small>ATS analyses completed</small>
+            </div>
+        </article>
+
+        <article class="insights-summary-card">
+            <div class="insights-summary-icon">
+                <i data-lucide="files"></i>
+            </div>
+
+            <div class="insights-summary-content">
+                <span>Resumes Analyzed</span>
+                <strong>{{ resumes_analyzed }}</strong>
+                <small>Unique resumes analyzed</small>
+            </div>
+        </article>
+
+        <article class="insights-summary-card">
+            <div class="insights-summary-icon">
+                <i data-lucide="chart-no-axes-combined"></i>
+            </div>
+
+            <div class="insights-summary-content">
+                <span>Average ATS Score</span>
+                <strong>{{ "%.1f"|format(average_score) }}</strong>
+                <small>Across all analyses</small>
+            </div>
+        </article>
+
+    </section>
+
+    <section class="insights-history-heading">
+        <div>
+            <span>YOUR ANALYSES</span>
+            <h2>Analysis History</h2>
+            <p>Track your scores, compare past results, and revisit saved reports.</p>
+        </div>
+    </section>
+
+    {% if analyses %}
+
+    <section class="insights-list" aria-label="Saved ATS analyses">
+        {% for item in analyses %}
+        <article class="insight-card">
+
+            <div class="insight-card-main">
+                <div class="insight-icon">
+                    <i data-lucide="file-search"></i>
+                </div>
+
+                <div class="insight-card-copy">
+                    <span class="insight-label">
+                        Analysis {{ item["analysis_number"] or loop.revindex }}
+                    </span>
+
+                    <h2>{{ item["resume_title"] or "Untitled Resume" }}</h2>
+
+                    <p>{{ item["job_title"] or "Job description analysis" }}</p>
+
+                    <small>{{ item["created_at"] }}</small>
+                </div>
+            </div>
+
+            <div class="insight-score">
+                <strong>{{ "%.1f"|format(item["score"] or 0) }}</strong>
+                <span>ATS Score</span>
+            </div>
+
+            <div class="insight-card-actions">
+                <a class="insight-view-btn" href="{{ url_for('analyzer.analyzer_page') }}?analysis_id={{ item['id'] }}">
+                    View Analysis
+                    <i data-lucide="arrow-right"></i>
+                </a>
+
+                <button type="button" class="insight-delete-btn" data-analysis-id="{{ item['id'] }}"
+                    data-analysis-number="{{ item['analysis_number'] or loop.revindex }}">
+                    <i data-lucide="trash-2"></i>
+                    Delete
+                </button>
+            </div>
+
+        </article>
+        {% endfor %}
+    </section>
+
+    {% else %}
+
+    <section class="insights-empty">
+        <div class="insights-empty-icon">
+            <i data-lucide="bar-chart-3"></i>
+        </div>
+
+        <h2>No analyses yet</h2>
+
+        <p>
+            Run your first ATS analysis and the complete report will appear
+            here for future reference.
+        </p>
+
+        <a class="btn btn-primary" href="{{ url_for('analyzer.analyzer_page') }}">
+            <i data-lucide="scan-search"></i>
+            Analyze a Resume
+        </a>
+    </section>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        if (window.lucide) lucide.createIcons();
+
+        document.addEventListener("click", async (event) => {
+            const button = event.target.closest(".insight-delete-btn");
+            if (!button) return;
+
+            const analysisId = button.dataset.analysisId;
+            const analysisNumber = button.dataset.analysisNumber;
+
+            if (!analysisId) return;
+
+            if (!window.confirm(
+                `Delete Analysis ${analysisNumber}?\n\nThis saved ATS report will be permanently removed.`
+            )) {
+                return;
+            }
+
+            const originalHTML = button.innerHTML;
+            button.disabled = true;
+            button.innerHTML = `<i data-lucide="loader-circle"></i> Deleting`;
+
+            if (window.lucide) lucide.createIcons();
+
+            try {
+                const response = await fetch(
+                    `/api/analyzer/analysis/${encodeURIComponent(analysisId)}/delete`,
+                    {
+                        method: "DELETE",
+                        headers: { "Accept": "application/json" }
+                    }
+                );
+
+                const data = await response.json().catch(() => ({}));
+
+                if (!response.ok || !data.success) {
+                    throw new Error(
+                        data.message || "Unable to delete this analysis."
+                    );
+                }
+
+                const card = button.closest(".insight-card");
+                if (card) card.remove();
+
+                if (!document.querySelector(".insight-card")) {
+                    window.location.reload();
+                }
+
+            } catch (error) {
+                button.disabled = false;
+                button.innerHTML = originalHTML;
+
+                if (window.lucide) lucide.createIcons();
+
+                window.alert(
+                    error.message || "Unable to delete this analysis."
+                );
+            }
+        });
+    });
+</script>
+{% endblock %}

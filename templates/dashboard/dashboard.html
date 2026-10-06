@@ -1,0 +1,573 @@
+{% extends "layouts/dashboard_base.html" %}
+
+{% block title %}
+Dashboard | Novus
+{% endblock %}
+
+{% block styles %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+{% endblock %}
+
+{% block dashboard_content %}
+
+<!-- Welcome -->
+
+<!-- ==========================
+     Dashboard Hero
+========================== -->
+
+<section class="dashboard-hero">
+
+    <!-- Left Side -->
+
+    <div class="hero-left">
+
+        <span class="hero-badge">
+
+            AI Career Platform
+
+        </span>
+
+        <h1>
+
+            Hi, {{ user_name }} 👋
+
+        </h1>
+
+        <p>
+
+            Let's build your career one step at a time.
+            Create ATS-friendly resumes, analyze job descriptions,
+            and improve your chances of getting shortlisted.
+
+        </p>
+
+        <div class="hero-actions">
+
+            <a href="/resume/new" class="btn btn-primary">
+
+                <i data-lucide="file-plus-2"></i>
+
+                Create Resume
+
+            </a>
+
+            <a href="{{ url_for('analyzer.analyzer_page') }}" class="btn btn-outline">
+
+                <i data-lucide="scan-search"></i>
+
+                Analyze Resume
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Right Side -->
+
+    <div class="hero-right">
+
+        <!-- Resume Progress -->
+
+        <div class="hero-card progress-card">
+
+            <div class="hero-card-header">
+
+                <h3>Resume Progress</h3>
+
+                <span class="progress-percentage">{{ last_resume_completion }}%</span>
+
+            </div>
+
+            <div class="mini-progress">
+                <div class="mini-progress-fill" style="width: {{ last_resume_completion|default(0) }}%;">
+                </div>
+            </div>
+
+            <p>
+
+                {{ last_resume_completion }}% completion
+
+            </p>
+
+            <a href="{{ url_for('resume.resume_studio', resume_id=resumes[0]['id']) if resumes else '/resume/new' }}">
+
+                {{ 'Continue →' if resumes else 'Create →' }}
+
+            </a>
+
+        </div>
+
+
+        <!-- Upload Resume -->
+
+        <div class="hero-card upload-card">
+
+            <div class="upload-icon">
+
+                <i data-lucide="upload"></i>
+
+            </div>
+
+            <div>
+
+                <h3>Upload Resume</h3>
+
+                <p>
+
+                    Import an existing PDF resume.
+
+                </p>
+
+                <a href="#" id="dashboardUploadTrigger">
+
+                    Upload →
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================
+     Dashboard Statistics
+========================== -->
+
+<section class="stats-grid">
+
+    <div class="stat-card">
+
+        <div class="stat-top">
+
+            <span>Total Resumes</span>
+
+            <div class="stat-icon purple">
+
+                <i data-lucide="file-text"></i>
+
+            </div>
+
+        </div>
+
+        <h2>{{ total_resumes }}</h2>
+
+        <p>{% if total_resumes %}Saved resumes{% else %}No resumes created{% endif %}</p>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-top">
+
+            <span>ATS Analyses</span>
+
+            <div class="stat-icon blue">
+
+                <i data-lucide="scan-search"></i>
+
+            </div>
+
+        </div>
+
+        <h2>{{ total_analyses }}</h2>
+
+        <p>{% if total_analyses %}Saved ATS analyses{% else %}No analyses yet{% endif %}</p>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-top">
+
+            <span>Highest ATS Score</span>
+
+            <div class="stat-icon green">
+
+                <i data-lucide="award"></i>
+
+            </div>
+
+        </div>
+
+        <h2>{% if highest_ats_score is not none %}{{ "%.0f"|format(highest_ats_score) }}%{% else %}--{% endif %}</h2>
+
+        <p>{% if highest_ats_score is not none %}Highest saved score{% else %}Analyze a resume{% endif %}</p>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-top">
+
+            <span>Profile Completion</span>
+
+            <div class="stat-icon orange">
+
+                <i data-lucide="target"></i>
+
+            </div>
+
+        </div>
+
+        <h2>{{ average_completion }}%</h2>
+
+        <p>{% if total_resumes %}Average resume completion{% else %}Create your first resume{% endif %}</p>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+     Resume Overview + ATS Overview
+========================================== -->
+
+<section class="dashboard-grid">
+
+    <!-- ================= Resume Overview ================= -->
+
+    <div class="dashboard-card">
+
+        <div class="card-header-row">
+
+            <h2>Your Resumes</h2>
+
+            <a href="/my-resumes">
+
+                View All →
+
+            </a>
+
+        </div>
+
+        <div class="resume-list">
+
+            {% if resumes %}
+            {% for item in resumes %}
+            <a href="{{ url_for('resume.resume_studio', resume_id=item['id']) }}" class="resume-item">
+                <div class="resume-icon">
+                    <i data-lucide="file-text"></i>
+                </div>
+                <div class="resume-details">
+                    <h4>{{ item['title'] or 'Untitled Resume' }}</h4>
+                    <span>Updated {{ item['updated_at'] }}</span>
+                </div>
+                <span class="resume-score score-blue">
+                    {{ item['completion'] or 0 }}%
+                </span>
+            </a>
+            {% endfor %}
+            {% else %}
+            <div class="empty-state">
+                <p>No resumes found.</p>
+                <a href="/resume/new" class="btn btn-primary">Create Resume</a>
+            </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= ATS Overview ================= -->
+
+    <div class="dashboard-card">
+
+        <div class="card-header-row">
+
+            <div>
+
+                <h2>ATS Overview</h2>
+
+                {% if ats_overview.has_analysis %}
+
+                <p class="section-subtitle">
+                    {{ ats_overview.resume_title }}
+                </p>
+
+                {% else %}
+
+                <p class="section-subtitle">
+                    Analyze a resume to see your ATS performance.
+                </p>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        {% if ats_overview.has_analysis %}
+
+        <div class="ats-overview">
+
+            <!-- Overall Score -->
+
+            <div class="ats-circle">
+
+                <svg class="progress-ring" width="150" height="150">
+
+                    <circle class="progress-ring-bg" cx="75" cy="75" r="60">
+                    </circle>
+
+                    <circle class="progress-ring-fill" cx="75" cy="75" r="60" style="
+                            stroke-dashoffset:
+                            {{ 377 - (377 * ats_overview.overall_score / 100) }};
+                        ">
+                    </circle>
+
+                </svg>
+
+
+                <div class="circle-content">
+
+                    <h2>
+                        {{ ats_overview.overall_score }}%
+                    </h2>
+
+                    <span>
+                        Overall Score
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Component Scores -->
+
+            <div class="ats-bars">
+
+                <div class="progress-item">
+
+                    <span>
+                        Keyword Match
+                    </span>
+
+                    <div class="progress-bar">
+
+                        <div class="fill" style="
+                                width:
+                                {{ ats_overview.keyword_match }}%;
+                            ">
+                        </div>
+
+                    </div>
+
+                    <strong>
+                        {{ ats_overview.keyword_match }}%
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-item">
+
+                    <span>
+                        Formatting
+                    </span>
+
+                    <div class="progress-bar">
+
+                        <div class="fill" style="
+                                width:
+                                {{ ats_overview.formatting }}%;
+                            ">
+                        </div>
+
+                    </div>
+
+                    <strong>
+                        {{ ats_overview.formatting }}%
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-item">
+
+                    <span>
+                        Content
+                    </span>
+
+                    <div class="progress-bar">
+
+                        <div class="fill" style="
+                                width:
+                                {{ ats_overview.content }}%;
+                            ">
+                        </div>
+
+                    </div>
+
+                    <strong>
+                        {{ ats_overview.content }}%
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-item">
+
+                    <span>
+                        Skills
+                    </span>
+
+                    <div class="progress-bar">
+
+                        <div class="fill" style="
+                                width:
+                                {{ ats_overview.skills }}%;
+                            ">
+                        </div>
+
+                    </div>
+
+                    <strong>
+                        {{ ats_overview.skills }}%
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Latest analysis information -->
+
+        <div class="ats-overview-meta">
+
+            <span>
+                Last analyzed:
+                {{ ats_overview.created_at }}
+            </span>
+
+            <a href="/analyzer?analysis_id={{ ats_overview.analysis_id }}" class="ats-overview-link">
+                View Analysis
+            </a>
+
+        </div>
+
+
+        {% else %}
+
+        <!-- No analysis yet -->
+
+        <div class="ats-overview-empty">
+
+            <div class="ats-empty-icon">
+                <i data-lucide="scan-search"></i>
+            </div>
+
+            <div>
+
+                <h3>
+                    No ATS analysis yet
+                </h3>
+
+                <p>
+                    Analyze one of your resumes against a job
+                    description to see your ATS score here.
+                </p>
+
+                <a href="/analyzer" class="btn btn-primary">
+                    Analyze Resume
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+<!-- Hidden Resume Upload Form -->
+
+<form id="dashboardResumeUploadForm" action="{{ url_for('resume.upload_resume') }}" method="POST"
+    enctype="multipart/form-data" style="display: none;">
+
+    <input type="file" id="dashboardResumeFile" name="resume" accept=".pdf,.docx">
+
+</form>
+
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const uploadTrigger = document.getElementById("dashboardUploadTrigger");
+        const fileInput = document.getElementById("dashboardResumeFile");
+        const uploadForm = document.getElementById("dashboardResumeUploadForm");
+
+        if (!uploadTrigger || !fileInput || !uploadForm) {
+            console.error("Resume upload elements not found.");
+            return;
+        }
+
+        uploadTrigger.addEventListener("click", function (event) {
+
+            event.preventDefault();
+
+            fileInput.click();
+
+        });
+
+        fileInput.addEventListener("change", function () {
+
+            const file = fileInput.files[0];
+
+            if (!file) {
+                return;
+            }
+
+            const filename = file.name.toLowerCase();
+
+            if (!filename.endsWith(".pdf") && !filename.endsWith(".docx")) {
+
+                alert("Please upload a PDF or DOCX resume.");
+
+                fileInput.value = "";
+
+                return;
+            }
+
+            const maxSize = 10 * 1024 * 1024;
+
+            if (file.size > maxSize) {
+
+                alert("Resume file must be smaller than 10 MB.");
+
+                fileInput.value = "";
+
+                return;
+            }
+
+            uploadForm.submit();
+
+        });
+
+    });
+
+</script>
+
+{% endblock %}

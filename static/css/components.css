@@ -1,0 +1,30 @@
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:14px 28px;
+    border-radius:12px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn-primary{
+    background:var(--primary);
+    color:white;
+}
+
+.btn-primary:hover{
+    background:var(--primary-dark);
+}
+
+.btn-outline{
+    border:1px solid var(--border);
+    background:white;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    padding:24px;
+}

@@ -1,0 +1,373 @@
+/* ==========================================================
+   NOVUS RESUME PDF
+   Real text-based A4 document
+========================================================== */
+
+
+@page {
+
+    size: A4;
+
+    margin:
+        16mm
+        16mm
+        16mm
+        16mm;
+
+}
+
+
+/* ==========================================================
+   DOCUMENT
+========================================================== */
+
+html,
+body {
+
+    margin: 0;
+
+    padding: 0;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 10.5pt;
+
+    line-height: 1.45;
+
+}
+
+
+.resume-document {
+
+    width: 100%;
+
+    max-width: 178mm;
+
+    margin: 0 auto;
+
+}
+
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.resume-header {
+
+    text-align: center;
+
+    padding-bottom: 9pt;
+
+    border-bottom: 1.2pt solid #111827;
+
+    margin-bottom: 13pt;
+
+}
+
+
+.resume-header h1 {
+
+    margin: 0;
+
+    font-size: 24pt;
+
+    line-height: 1.1;
+
+    font-weight: 700;
+
+}
+
+
+.resume-headline {
+
+    margin-top: 4pt;
+
+    font-size: 11pt;
+
+    font-weight: 600;
+
+}
+
+
+.contact-row,
+.links-row {
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 7pt;
+
+    margin-top: 5pt;
+
+    font-size: 9pt;
+
+}
+
+
+.links-row a {
+
+    color: #111827;
+
+    text-decoration: none;
+
+}
+
+
+/* ==========================================================
+   SECTIONS
+========================================================== */
+
+.resume-section {
+
+    margin-bottom: 11pt;
+
+}
+
+
+.resume-section h2 {
+
+    margin: 0 0 5pt;
+
+    padding-bottom: 2pt;
+
+    border-bottom: 0.8pt solid #6b7280;
+
+    font-size: 11.5pt;
+
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4pt;
+
+}
+
+
+/* ==========================================================
+   TEXT
+========================================================== */
+
+.summary {
+
+    margin: 0;
+
+    text-align: justify;
+
+}
+
+
+.muted {
+
+    color: #4b5563;
+
+    font-size: 9pt;
+
+}
+
+
+.institution {
+
+    margin-top: 1pt;
+
+    font-size: 9.5pt;
+
+}
+
+
+.item-heading {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: baseline;
+
+    gap: 10pt;
+
+}
+
+
+.item-heading strong {
+
+    font-size: 10.5pt;
+
+}
+
+
+.date {
+
+    white-space: nowrap;
+
+    font-size: 9pt;
+
+    color: #4b5563;
+
+}
+
+
+/* ==========================================================
+   EDUCATION / EXPERIENCE / PROJECTS
+========================================================== */
+
+.education-item,
+.project-item,
+.experience-item,
+.certification-item {
+
+    margin-bottom: 8pt;
+
+    break-inside: avoid;
+
+}
+
+
+.resume-section ul {
+
+    margin:
+
+        3pt
+
+        0
+
+        0
+
+        14pt;
+
+    padding: 0;
+
+}
+
+
+.resume-section li {
+
+    margin-bottom: 2pt;
+
+}
+
+
+/* ==========================================================
+   SKILLS
+========================================================== */
+
+.skills-list {
+
+    display: block;
+
+}
+
+
+.skill-group {
+
+    margin-bottom: 3pt;
+
+}
+
+
+.skill-group strong {
+
+    font-weight: 700;
+
+}
+
+
+.skill-group span {
+
+    font-weight: 400;
+
+}
+
+
+/* ==========================================================
+   LINKS
+========================================================== */
+
+.resume-document a {
+
+    color: #111827;
+
+    text-decoration: none;
+
+}
+
+
+.project-link {
+
+    margin-top: 3pt;
+
+    font-size: 9pt;
+
+}
+
+
+/* ==========================================================
+   PAGE BREAK CONTROL
+========================================================== */
+
+.resume-section h2 {
+
+    break-after: avoid;
+
+}
+
+
+.resume-section {
+
+    orphans: 3;
+
+    widows: 3;
+
+}
+
+
+.education-item,
+.project-item,
+.experience-item,
+.certification-item {
+
+    break-inside: avoid;
+
+}
+
+.certification-item {
+
+    margin-bottom: 6px;
+
+    break-inside: avoid;
+
+    page-break-inside: avoid;
+
+}
+
+.certification-item strong {
+
+    font-weight: 600;
+
+}
+
+.certification-item a {
+
+    margin-left: 8px;
+
+}
+
+/* ==========================================================
+   PRINT CLEANUP
+========================================================== */
+
+* {
+
+    box-sizing: border-box;
+
+}

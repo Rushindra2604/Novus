@@ -1,0 +1,423 @@
+{% extends "layouts/dashboard_base.html" %}
+
+{% block title %}
+ATS Analyzer | Novus
+{% endblock %}
+
+{% block styles %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/analyzer.css') }}">
+
+{% endblock %}
+
+{% block dashboard_topbar %}
+{% endblock %}
+
+{% block dashboard_content %}
+
+<section class="analyzer-page">
+
+    <section class="analyzer-page">
+
+        <!-- =====================================================
+         NEW ANALYSIS SETUP
+         Visible before an analysis is created or after reset.
+    ====================================================== -->
+
+        <div id="analyzerSetupState" class="analyzer-setup-state">
+
+            <!-- =====================================================
+                 PAGE INTRO
+            ====================================================== -->
+
+            <header class="analyzer-page-intro">
+
+                <h1>
+                    ATS Analyzer
+                </h1>
+
+                <p>
+                    Understand how well your resume matches a target job
+                    and identify the skills, keywords, and areas you can improve.
+                </p>
+
+            </header>
+
+            <div class="analyzer-grid">
+
+                <!-- Resume Selection -->
+
+                <section class="analyzer-card resume-card">
+
+                    <div class="analyzer-card-header">
+
+                        <div class="analyzer-card-icon">
+                            <i data-lucide="file-text"></i>
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                Your Resume
+                            </h2>
+
+                            <p>
+                                Choose the saved resume you want to analyze.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    {% if resumes %}
+
+                    <div class="resume-selector">
+
+                        <label for="resumeSelect">
+                            Saved resume
+                        </label>
+
+                        <select id="resumeSelect" name="resume_id">
+
+                            <option value="">
+                                Select a resume
+                            </option>
+
+                            {% for resume in resumes %}
+
+                            <option value="{{ resume['id'] }}">
+                                {{ resume['title'] }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <p class="analyzer-field-hint">
+                        Select the resume version you want to compare
+                        against the target job.
+                    </p>
+
+                    {% else %}
+
+                    <div class="empty-resumes">
+
+                        <div class="empty-icon">
+                            <i data-lucide="file-plus-2"></i>
+                        </div>
+
+                        <h3>
+                            No saved resumes
+                        </h3>
+
+                        <p>
+                            Create a resume in Resume Studio before
+                            running an ATS analysis.
+                        </p>
+
+                        <a href="/resume/new" class="btn btn-primary">
+
+                            <i data-lucide="plus"></i>
+
+                            Create Resume
+
+                        </a>
+
+                    </div>
+
+                    {% endif %}
+
+                </section>
+
+
+                <!-- Job Description -->
+
+                <section class="analyzer-card job-card">
+
+                    <div class="analyzer-card-header">
+
+                        <div class="analyzer-card-icon">
+                            <i data-lucide="briefcase-business"></i>
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                Job Description
+                            </h2>
+
+                            <p>
+                                Paste the job posting you're targeting.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="job-description-wrapper">
+
+                        <label for="jobDescription">
+                            Job description
+                        </label>
+
+                        <textarea id="jobDescription" name="job_description"
+                            placeholder="Paste the complete job description here..."></textarea>
+
+                        <div class="textarea-footer">
+
+                            <span>
+                                Include responsibilities, skills,
+                                qualifications, and requirements.
+                            </span>
+
+                            <span>
+                                <strong id="jobDescriptionCount">
+                                    0
+                                </strong>
+                                characters
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- =====================================================
+         ANALYZE ACTION
+    ====================================================== -->
+
+            <section class="analyzer-action">
+
+                <div class="analyzer-action-content">
+
+                    <div class="action-icon">
+                        <i data-lucide="scan-search"></i>
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Ready to analyze?
+                        </h2>
+
+                        <p>
+                            Novus will parse your resume, compare it
+                            with the job requirements, calculate your
+                            ATS score, and generate improvement insights.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button type="button" id="analyzeResumeBtn" class="btn btn-primary analyzer-submit">
+
+                    <i data-lucide="scan-search"></i>
+
+                    Analyze Resume
+
+                </button>
+
+            </section>
+
+            <!-- =====================================================
+     GEMINI AI — BEFORE ANALYSIS
+     Informational only. Visible only in setup state.
+====================================================== -->
+
+            <section class="pre-analysis-ai">
+
+                <div class="pre-analysis-ai-icon">
+                    <i data-lucide="sparkles"></i>
+                </div>
+
+                <div class="pre-analysis-ai-content">
+
+                    <div class="pre-analysis-ai-heading">
+
+                        <span class="pre-analysis-ai-eyebrow">
+                            GEMINI AI
+                        </span>
+
+                        <span class="pre-analysis-ai-badge">
+                            Powered by Gemini
+                        </span>
+
+                    </div>
+
+                    <h2>
+                        Get contextual resume improvement suggestions.
+                    </h2>
+
+                    <p>
+                        After your ATS analysis, Gemini can review your resume
+                        against the job description and suggest clearer,
+                        more relevant wording using only the experience
+                        already present in your resume.
+                    </p>
+
+                    <div class="pre-analysis-ai-points">
+
+                        <span>
+                            <i data-lucide="check"></i>
+                            Preserves your existing experience
+                        </span>
+
+                        <span>
+                            <i data-lucide="check"></i>
+                            Does not change your ATS score
+                        </span>
+
+                        <span>
+                            <i data-lucide="check"></i>
+                            No invented skills or experience
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- =====================================================
+    HOW IT WORKS
+    ====================================================== -->
+
+            <section class="analysis-info">
+
+                <div class="info-heading">
+
+                    <span>
+                        HOW NOVUS ANALYZES YOUR RESUME
+                    </span>
+
+                    <h2>
+                        From resume to actionable insights.
+                    </h2>
+
+                </div>
+
+
+                <div class="info-grid">
+
+                    <!-- Parse -->
+
+                    <div class="info-item">
+
+                        <span class="info-number">
+                            01
+                        </span>
+
+                        <i data-lucide="file-search-2"></i>
+
+                        <h3>
+                            Parse
+                        </h3>
+
+                        <p>
+                            Novus extracts and structures the
+                            information from your resume.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Compare -->
+
+                    <div class="info-item">
+
+                        <span class="info-number">
+                            02
+                        </span>
+
+                        <i data-lucide="git-compare"></i>
+
+                        <h3>
+                            Compare
+                        </h3>
+
+                        <p>
+                            Your resume is compared against the
+                            job's skills, keywords, and requirements.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Score -->
+
+                    <div class="info-item">
+
+                        <span class="info-number">
+                            03
+                        </span>
+
+                        <i data-lucide="chart-no-axes-combined"></i>
+
+                        <h3>
+                            Score
+                        </h3>
+
+                        <p>
+                            Novus calculates a weighted ATS score
+                            using the detected requirements.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Improve -->
+
+                    <div class="info-item">
+
+                        <span class="info-number">
+                            04
+                        </span>
+
+                        <i data-lucide="sparkles"></i>
+
+                        <h3>
+                            Improve
+                        </h3>
+
+                        <p>
+                            Gemini provides contextual suggestions
+                            using information already present in your resume.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- =====================================================
+         ANALYSIS RESULT
+         The report is rendered here after Analyze Resume or
+         when an exact saved analysis is restored.
+    ====================================================== -->
+
+        <section id="atsReport" class="ats-report" hidden aria-live="polite"></section>
+
+    </section>
+
+    {% endblock %}
+
+
+    {% block scripts %}
+
+    <script src="{{ url_for('static', filename='js/analyzer.js') }}"></script>
+
+    {% endblock %}

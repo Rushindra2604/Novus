@@ -1,0 +1,157 @@
+<section class="editor-card" id="personal-info" data-section="personal">
+
+    <div class="card-header">
+
+        <div class="drag-handle">
+
+            <i data-lucide="grip-vertical"></i>
+
+        </div>
+
+        <div class="card-title">
+
+            <i data-lucide="user-round"></i>
+
+            <div>
+
+                <h2>Personal Information</h2>
+
+                <p>Basic contact details shown to recruiters.</p>
+
+            </div>
+
+        </div>
+
+        <button class="collapse-btn" type="button">
+
+            <i data-lucide="chevron-down"></i>
+
+        </button>
+
+    </div>
+
+    <div class="card-content">
+
+        <!-- BASIC INFORMATION -->
+
+        <div class="section-heading">
+
+            <h3>Basic Information</h3>
+
+        </div>
+
+        <div class="input-grid two-column">
+
+            <div class="input-group">
+
+                <label>Full Name *</label>
+
+                <input type="text" class="resume-input" data-section="personal" data-field="fullName"
+                    placeholder="Rushindra Dasari">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Professional Headline *</label>
+
+                <input list="headlineSuggestions" class="resume-input" data-section="personal" data-field="headline"
+                    placeholder="Python Backend Developer">
+
+                <datalist id="headlineSuggestions">
+
+                    <option value="Python Backend Developer">
+
+                    <option value="Software Engineer">
+
+                    <option value="Python Developer">
+
+                    <option value="Backend Developer">
+
+                    <option value="Full Stack Developer">
+
+                    <option value="Frontend Developer">
+
+                </datalist>
+
+            </div>
+
+        </div>
+
+        <div class="input-grid two-column">
+
+            <div class="input-group">
+
+                <label>Email Address *</label>
+
+                <input type="email" class="resume-input" data-section="personal" data-field="email"
+                    placeholder="example@email.com">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Phone Number *</label>
+
+                <input type="text" class="resume-input" data-section="personal" data-field="phone"
+                    placeholder="+91 9876543210">
+
+            </div>
+
+        </div>
+
+        <!-- PROFESSIONAL PROFILES -->
+
+        <div class="section-heading">
+
+            <h3>Professional Profiles</h3>
+
+        </div>
+
+        <div class="input-grid two-column">
+
+            <div class="input-group">
+
+                <label>Current Location</label>
+
+                <input type="text" class="resume-input" data-section="personal" data-field="location"
+                    placeholder="Hyderabad, India">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Portfolio Website</label>
+
+                <input type="url" class="resume-input" data-section="personal" data-field="portfolio"
+                    placeholder="https://yourportfolio.com">
+
+            </div>
+
+        </div>
+
+        <div class="input-grid two-column">
+
+            <div class="input-group">
+
+                <label>LinkedIn Profile</label>
+
+                <input type="url" class="resume-input" data-section="personal" data-field="linkedin"
+                    placeholder="https://linkedin.com/in/...">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>GitHub Profile</label>
+
+                <input type="url" class="resume-input" data-section="personal" data-field="github"
+                    placeholder="https://github.com/...">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

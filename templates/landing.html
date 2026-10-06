@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novus | From Resume to Opportunity</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/variables.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+</head>
+<body>
+
+{% include 'partials/navbar.html' %}
+
+<main>
+
+<section class="hero">
+    <div class="container hero-container">
+
+        <div class="hero-content">
+
+            <span class="hero-tag">AI Career Platform</span>
+
+            <h1>
+                From Resume
+                <br>
+                to
+                <span>Opportunity</span>
+            </h1>
+
+            <p>
+                Build ATS-friendly resumes, analyze job descriptions,
+                discover missing skills, improve your resume with AI,
+                and increase your chances of getting shortlisted.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="/register" class="btn btn-primary">Get Started Free</a>
+                <a href="#features" class="btn btn-outline">Learn More</a>
+            </div>
+
+        </div>
+
+        <div class="hero-image">
+
+            <div class="dashboard-preview">
+
+                <div class="preview-header">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div class="preview-sidebar"></div>
+
+                <div class="preview-main">
+
+                    <div class="preview-banner"></div>
+
+                    <div class="preview-grid">
+
+                        <div class="preview-card"></div>
+                        <div class="preview-card"></div>
+                        <div class="preview-card"></div>
+                        <div class="preview-card"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="trusted">
+    <div class="container">
+        <p class="trusted-title">Built with modern technologies</p>
+        <div class="tech-stack">
+            <div class="tech-card">Flask</div>
+            <div class="tech-card">Python</div>
+            <div class="tech-card">SQLite</div>
+            <div class="tech-card">Gemini AI</div>
+            <div class="tech-card">PDFPlumber</div>
+            <div class="tech-card">HTML5</div>
+            <div class="tech-card">CSS3</div>
+            <div class="tech-card">JavaScript</div>
+        </div>
+    </div>
+</section>
+
+<section id="features" class="section">
+    <div class="container">
+
+        <div class="section-header">
+            <h2>Everything You Need to Launch Your Career</h2>
+            <p>One platform to build, analyze and improve your resume.</p>
+        </div>
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+                <h3>Resume Studio</h3>
+                <p>Create modern ATS-friendly resumes.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>ATS Analyzer</h3>
+                <p>Compare resumes against job descriptions.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>AI Suggestions</h3>
+                <p>Improve projects and experience descriptions.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Career Insights</h3>
+                <p>Track resume performance and progress.</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section id="workflow" class="workflow section">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <h2>How Novus Works</h2>
+
+            <p>Four simple steps from resume creation to interview readiness.</p>
+
+        </div>
+
+        <div class="workflow-grid">
+
+            <div class="workflow-card">
+                <span class="step-number">01</span>
+                <h3>Create Resume</h3>
+                <p>Build a professional ATS-friendly resume.</p>
+            </div>
+
+            <div class="workflow-card">
+                <span class="step-number">02</span>
+                <h3>Upload Resume</h3>
+                <p>Upload your resume and job description.</p>
+            </div>
+
+            <div class="workflow-card">
+                <span class="step-number">03</span>
+                <h3>Analyze</h3>
+                <p>Get a detailed ATS report and score.</p>
+            </div>
+
+            <div class="workflow-card">
+                <span class="step-number">04</span>
+                <h3>Improve</h3>
+                <p>Apply recommendations and AI suggestions.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="cta section">
+
+    <div class="container">
+
+        <div class="cta-box">
+
+            <h2>Ready to Build Your Dream Resume?</h2>
+
+            <p>
+                Start using Novus today and improve your chances of getting shortlisted.
+            </p>
+
+            <a href="/register" class="btn btn-primary">Get Started Free</a>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+{% include 'partials/footer.html' %}
+
+</body>
+</html>

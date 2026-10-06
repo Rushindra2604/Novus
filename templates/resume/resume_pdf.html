@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {{ resume.title or "Novus Resume" }}
+    </title>
+
+    <link rel="stylesheet" href="{{ url_for(
+            'static',
+            filename='css/resume/pdf.css'
+        ) }}">
+
+</head>
+
+
+<body>
+
+    <div class="resume-document">
+
+        {% set personal = resume.personal or {} %}
+
+
+        <!-- ==================================================
+         HEADER
+    =================================================== -->
+
+        <header class="resume-header">
+
+            <h1>
+                {{ personal.fullName or "Your Name" }}
+            </h1>
+
+            {% if personal.headline %}
+
+            <div class="resume-headline">
+                {{ personal.headline }}
+            </div>
+
+            {% endif %}
+
+
+            <div class="contact-row">
+
+                {% if personal.email %}
+                <span>{{ personal.email }}</span>
+                {% endif %}
+
+                {% if personal.phone %}
+                <span>{{ personal.phone }}</span>
+                {% endif %}
+
+                {% if personal.location %}
+                <span>{{ personal.location }}</span>
+                {% endif %}
+
+            </div>
+
+
+            <div class="links-row">
+
+                {% if personal.linkedin %}
+                <a href="{{ personal.linkedin }}">
+                    LinkedIn
+                </a>
+                {% endif %}
+
+                {% if personal.github %}
+                <a href="{{ personal.github }}">
+                    GitHub
+                </a>
+                {% endif %}
+
+                {% if personal.portfolio %}
+                <a href="{{ personal.portfolio }}">
+                    Portfolio
+                </a>
+                {% endif %}
+
+            </div>
+
+        </header>
+
+
+        {% set order = resume.sectionOrder or [
+        "personal",
+        "summary",
+        "education",
+        "skills",
+        "projects",
+        "experience",
+        "certifications"
+        ] %}
+
+
+        {% for section in order %}
+
+
+        {% if section == "summary" and resume.summary %}
+
+        <section class="resume-section">
+
+            <h2>Professional Summary</h2>
+
+            <p class="summary">
+                {{ resume.summary }}
+            </p>
+
+        </section>
+
+        {% endif %}
+
+
+        {% if section == "education" and resume.education %}
+
+        {% set items = resume.education
+        | selectattr("degree")
+        | list %}
+
+        {% if items %}
+
+        <section class="resume-section">
+
+            <h2>Education</h2>
+
+            {% for education in items %}
+
+            <article class="education-item">
+
+                <div class="item-heading">
+
+                    <strong>
+                        {{ education.degree }}
+                    </strong>
+
+                    {% if education.startYear or education.endYear %}
+
+                    <span class="date">
+                        {{ education.startYear }}
+                        {% if education.startYear and education.endYear %}
+                        –
+                        {% endif %}
+                        {{ education.endYear }}
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                {% if education.institution %}
+
+                <div class="institution">
+                    {{ education.institution }}
+                </div>
+
+                {% endif %}
+
+
+                {% if education.score %}
+
+                <div class="muted">
+                    {{ education.score }}
+                </div>
+
+                {% endif %}
+
+            </article>
+
+            {% endfor %}
+
+        </section>
+
+        {% endif %}
+
+        {% endif %}
+
+
+        {% if section == "skills" and resume.skills %}
+
+        <section class="resume-section">
+
+            <h2>Skills</h2>
+
+            <div class="skills-list">
+
+                {% set skill_groups = [
+                ("languages", "Programming Languages"),
+                ("frameworks", "Frameworks & Libraries"),
+                ("databases", "Databases"),
+                ("tools", "Tools & Platforms"),
+                ("others", "Other Skills")
+                ] %}
+
+
+                {% for key, label in skill_groups %}
+
+                {% set skills =
+                resume.skills.get(key, []) %}
+
+                {% if skills %}
+
+                <div class="skill-group">
+
+                    <strong>
+                        {{ label }}:
+                    </strong>
+
+                    <span>
+                        {{ skills | join(", ") }}
+                    </span>
+
+                </div>
+
+                {% endif %}
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+        {% endif %}
+
+
+        {% if section == "projects" and resume.projects %}
+
+        {% set items = resume.projects
+        | selectattr("title")
+        | list %}
+
+        {% if items %}
+
+        <section class="resume-section">
+
+            <h2>Projects</h2>
+
+            {% for project in items %}
+
+            <article class="project-item">
+
+                <div class="item-heading">
+
+                    <strong>
+                        {{ project.title }}
+                    </strong>
+
+                    {% if project.liveDemo %}
+
+                    <a href="{{ project.liveDemo }}">
+                        Live Demo
+                    </a>
+
+                    {% endif %}
+
+                </div>
+
+
+                {% if project.technologies %}
+
+                <div class="muted">
+
+                    {{ project.technologies | join(" • ") }}
+
+                </div>
+
+                {% endif %}
+
+
+                {% set bullets =
+                project.bullets
+                | select
+                | list %}
+
+                {% if bullets %}
+
+                <ul>
+
+                    {% for bullet in bullets %}
+
+                    <li>
+                        {{ bullet }}
+                    </li>
+
+                    {% endfor %}
+
+                </ul>
+
+                {% endif %}
+
+
+                {% if project.github %}
+
+                <div class="project-link">
+
+                    <a href="{{ project.github }}">
+                        GitHub Repository
+                    </a>
+
+                </div>
+
+                {% endif %}
+
+            </article>
+
+            {% endfor %}
+
+        </section>
+
+        {% endif %}
+
+        {% endif %}
+
+
+        {% if section == "experience" and resume.experience %}
+
+        {% set items = resume.experience
+        | selectattr("jobTitle")
+        | list %}
+
+        {% if items %}
+
+        <section class="resume-section">
+
+            <h2>Experience</h2>
+
+            {% for experience in items %}
+
+            <article class="experience-item">
+
+                <div class="item-heading">
+
+                    <strong>
+                        {{ experience.jobTitle }}
+                    </strong>
+
+                    {% if experience.startMonth
+                    or experience.startYear
+                    or experience.endMonth
+                    or experience.endYear
+                    or experience.currentlyWorking %}
+
+                    <span class="date">
+
+                        {% if experience.startMonth %}
+                        {{ experience.startMonth }}
+                        {% endif %}
+
+                        {% if experience.startYear %}
+                        {{ experience.startYear }}
+                        {% endif %}
+
+                        {% if experience.startMonth
+                        or experience.startYear %}
+                        –
+                        {% endif %}
+
+                        {% if experience.currentlyWorking %}
+
+                        Present
+
+                        {% else %}
+
+                        {% if experience.endMonth %}
+                        {{ experience.endMonth }}
+                        {% endif %}
+
+                        {% if experience.endYear %}
+                        {{ experience.endYear }}
+                        {% endif %}
+
+                        {% endif %}
+
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                {% if experience.company %}
+
+                <div class="institution">
+
+                    {{ experience.company }}
+
+                    {% if experience.location %}
+                    · {{ experience.location }}
+                    {% endif %}
+
+                </div>
+
+                {% endif %}
+
+
+                {% set responsibilities =
+                experience.responsibilities
+                | select
+                | list %}
+
+                {% if responsibilities %}
+
+                <ul>
+
+                    {% for responsibility
+                    in responsibilities %}
+
+                    <li>
+                        {{ responsibility }}
+                    </li>
+
+                    {% endfor %}
+
+                </ul>
+
+                {% endif %}
+
+            </article>
+
+            {% endfor %}
+
+        </section>
+
+        {% endif %}
+
+        {% endif %}
+
+
+        {% if section == "certifications"
+        and resume.certifications %}
+
+        {% set items = resume.certifications
+        | selectattr("name")
+        | list %}
+
+        {% if items %}
+
+        <section class="resume-section">
+
+            <h2>Certifications</h2>
+
+            {% for certification in items %}
+
+            <article class="certification-item">
+
+                <strong>
+                    
+                    {{ certification.name }}
+
+                    {% if certification.organization %}
+                
+                    - {{ certification.organization }}
+                
+                    {% endif %}
+                
+                </strong>
+
+                {% if certification.credentialUrl %}
+                
+                <a href="{{ certification.credentialUrl }}">
+                
+                    View Credential
+                
+                </a>
+                
+                {% endif %}
+
+            </article>
+
+            {% endfor %}
+
+        </section>
+
+        {% endif %}
+
+        {% endif %}
+
+
+        {% if section.startswith("additional-")
+        or section.startswith("custom-") %}
+
+        {% for item in resume.additionalSections %}
+
+        {% if item.id == section
+        and item.visible != false
+        and item.content %}
+
+        <section class="resume-section">
+
+            <h2>
+                {{ item.title }}
+            </h2>
+
+            {% if item.type == "languages" %}
+
+            <ul>
+
+                {% for language in
+                item.content.replace(",", "\n").splitlines() %}
+
+                {% if language.strip() %}
+
+                <li>
+                    {{ language.strip() }}
+                </li>
+
+                {% endif %}
+
+                {% endfor %}
+
+            </ul>
+
+            {% else %}
+
+            {% for paragraph in
+            item.content.split("\n\n") %}
+
+            {% if paragraph.strip() %}
+
+            <p>
+                {{ paragraph }}
+            </p>
+
+            {% endif %}
+
+            {% endfor %}
+
+            {% endif %}
+
+        </section>
+
+        {% endif %}
+
+        {% endfor %}
+
+        {% endif %}
+
+
+        {% endfor %}
+
+    </div>
+
+</body>
+
+</html>

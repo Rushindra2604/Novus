@@ -1,0 +1,81 @@
+{% extends "layouts/auth_base.html" %}
+
+{% block title %}Login | Novus{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-page">
+
+    <div class="auth-container">
+
+        <div class="auth-left">
+            <h1>Welcome Back</h1>
+            <p>
+                Continue building your career with Novus.
+            </p>
+        </div>
+
+        <div class="auth-right">
+
+            <div class="auth-card">
+
+                <h2>Login</h2>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                
+                {% if messages %}
+                
+                <div class="auth-flash-messages" role="alert" aria-live="polite">
+                
+                    {% for category, message in messages %}
+                
+                    <div class="auth-flash auth-flash-{{ category }}">
+                
+                        <span>{{ message }}</span>
+                
+                    </div>
+                
+                    {% endfor %}
+                
+                </div>
+                
+                {% endif %}
+                
+                {% endwith %}
+
+                <form method="POST">
+
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="email" name="email" placeholder="Enter your email">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" name="password" placeholder="Enter your password">
+                    </div>
+
+                    <button class="btn btn-primary auth-btn">
+                        Login
+                    </button>
+
+                </form>
+
+                <p class="auth-footer">
+                    Don't have an account?
+                    <a href="/register">Register</a>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,1729 @@
+/* ==========================================================
+   NOVUS — RESUME STUDIO
+   editor.css
+========================================================== */
+
+/* -------------------- Editor Header -------------------- */
+
+.editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    background: #fff;
+    border: 1px solid #e8eaf0;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, .06);
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+    flex: 1;
+}
+
+.resume-title {
+    width: 100%;
+    max-width: 520px;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #111827;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.resume-title::placeholder {
+    color: #9ca3af;
+}
+
+.resume-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.meta-item i {
+    width: 17px;
+    height: 17px;
+    color: #6d4aff;
+}
+
+.meta-item strong {
+    margin-left: 4px;
+    color: #111827;
+    font-weight: 600;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.save-status {
+    color: #6b7280;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+/* -------------------- Progress Panel -------------------- */
+
+.progress-panel {
+    position: sticky;
+    top: 20px;
+    min-width: 0;
+}
+
+.progress-card {
+    padding: 20px 14px;
+    background: #fff;
+    border: 1px solid #e8eaf0;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, .06);
+}
+
+.progress-card h3,
+.progress-card h4 {
+    margin: 0;
+    color: #111827;
+}
+
+.progress-card h3 {
+    padding: 0 8px 16px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.progress-card h4 {
+    padding: 16px 8px 10px;
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.section-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.section-nav>a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-height: 44px;
+    padding: 9px 8px;
+    border-radius: 10px;
+    color: #4b5563;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background .2s ease, color .2s ease;
+}
+
+.section-nav>a:hover {
+    background: #f5f3ff;
+    color: #6d4aff;
+}
+
+.section-nav>a.active-section {
+    background: rgba(109, 74, 255, .10);
+    color: #6d4aff;
+    font-weight: 600;
+}
+
+.section-nav>a.completed {
+    color: #16a34a;
+}
+
+.section-nav-content {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+    flex: 1;
+}
+
+.section-nav>a>i,
+.section-nav-content>i {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+}
+
+.section-nav>a>span,
+.section-nav-content>span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.section-visibility-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
+    margin-left: auto;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #9ca3af;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease;
+}
+
+.section-visibility-btn:hover {
+    background: #f3f4f6;
+    color: #6d4aff;
+}
+
+.section-visibility-btn i {
+    width: 16px;
+    height: 16px;
+}
+
+.divider {
+    height: 1px;
+    margin: 14px 8px;
+    background: #eceff3;
+}
+
+.additional-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.add-section {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    padding: 9px 8px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: #6b7280;
+    text-align: left;
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.add-section:hover {
+    background: #f5f3ff;
+    color: #6d4aff;
+}
+
+.add-section i {
+    width: 17px;
+    height: 17px;
+}
+
+/* -------------------- Editor Cards -------------------- */
+
+.editor-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.editor-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e8eaf0;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, .055);
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.editor-card:hover {
+    border-color: #ddd8ff;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, .075);
+}
+
+.editor-card.active {
+    border-color: rgba(109, 74, 255, .30);
+}
+
+.editor-card.completed {
+    border-color: rgba(34, 197, 94, .28);
+}
+
+/* Higher specificity prevents cards.css from breaking Studio headers. */
+.editor-card>.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    min-height: 64px;
+    padding: 14px 18px;
+    border-bottom: 1px solid #edf0f3;
+    background: #fff;
+}
+
+.editor-card .card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    flex: 1;
+}
+
+.editor-card .card-title h2,
+.editor-card .card-title h3 {
+    margin: 0;
+    color: #111827;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.editor-card .card-title>i {
+    width: 19px;
+    height: 19px;
+    flex: 0 0 19px;
+    color: #6d4aff;
+}
+
+.editor-card>.card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    flex: 0 0 auto;
+}
+
+/* Generic action buttons inside section headers. */
+.section-action-btn,
+.section-visibility-btn,
+.delete-btn,
+.remove-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 0;
+    border-radius: 9px;
+    background: transparent;
+    color: #9ca3af;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease;
+}
+
+.section-action-btn:hover,
+.delete-btn:hover,
+.remove-btn:hover {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.collapse-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 0;
+    border-radius: 9px;
+    background: transparent;
+    color: #6b7280;
+    cursor: pointer;
+}
+
+.collapse-btn:hover {
+    background: #f3f4f6;
+    color: #111827;
+}
+
+.collapse-btn i {
+    transition: transform .2s ease;
+}
+
+.editor-card.collapsed .card-content {
+    display: none;
+}
+
+.editor-card.collapsed .collapse-btn i {
+    transform: rotate(-90deg);
+}
+
+.editor-card>.card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 22px;
+}
+
+/* -------------------- Form Controls -------------------- */
+
+.card-content label {
+    display: block;
+    margin: 0 0 7px;
+    color: #374151;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.form-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card-content input,
+.card-content textarea,
+.card-content select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid #d8dde5;
+    border-radius: 11px;
+    background: #fff;
+    color: #111827;
+    font: inherit;
+    font-size: 14px;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.card-content input::placeholder,
+.card-content textarea::placeholder {
+    color: #9ca3af;
+}
+
+.card-content input:focus,
+.card-content textarea:focus,
+.card-content select:focus {
+    outline: none;
+    border-color: #6d4aff;
+    box-shadow: 0 0 0 3px rgba(109, 74, 255, .11);
+}
+
+.card-content textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+/* -------------------- Repeatable Items -------------------- */
+
+.repeatable-card {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #fafbfc;
+}
+
+.repeatable-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.repeatable-card-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+    color: #111827;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.repeatable-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 0 0 auto;
+}
+
+.drag-handle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    cursor: grab;
+}
+
+.drag-handle:hover {
+    color: #6d4aff;
+}
+
+.drag-handle:active {
+    cursor: grabbing;
+}
+
+/* Delete action stays with the repeatable item, not below the
+   section header or floating outside the card. */
+.repeatable-card .delete-btn,
+.repeatable-card .remove-btn {
+    color: #9ca3af;
+}
+
+.repeatable-card .delete-btn:hover,
+.repeatable-card .remove-btn:hover {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+/* -------------------- Buttons -------------------- */
+
+.editor-header .btn,
+.editor-card .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform .15s ease, background .2s ease, border-color .2s ease;
+}
+
+.editor-header .btn:hover,
+.editor-card .btn:hover {
+    transform: translateY(-1px);
+}
+
+.editor-header .btn i,
+.editor-card .btn i {
+    width: 17px;
+    height: 17px;
+}
+
+.btn-primary {
+    background: #6d4aff;
+    color: #fff;
+    border: 1px solid #6d4aff;
+}
+
+.btn-primary:hover {
+    background: #5b3ff1;
+}
+
+.btn-outline {
+    background: #fff;
+    color: #374151;
+    border: 1px solid #d8dde5;
+}
+
+.btn-outline:hover {
+    background: #f9fafb;
+}
+
+.btn-secondary {
+    background: #f3f4f6;
+    color: #374151;
+    border: 1px solid #f3f4f6;
+}
+
+.btn-secondary:hover {
+    background: #e5e7eb;
+}
+
+.btn-sm {
+    padding: 7px 11px;
+    font-size: 12px;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+/* Utilities */
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.mt-16 {
+    margin-top: 16px;
+}
+
+.mt-24 {
+    margin-top: 24px;
+}
+
+.mb-16 {
+    margin-bottom: 16px;
+}
+
+.mb-24 {
+    margin-bottom: 24px;
+}
+
+/* -------------------- Responsive -------------------- */
+
+@media (max-width: 1100px) {
+    .editor-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-right {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .resume-title {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .editor-header {
+        padding: 18px;
+    }
+
+    .header-right .btn {
+        flex: 1;
+    }
+
+    .editor-card>.card-header,
+    .editor-card>.card-content {
+        padding: 16px;
+    }
+
+    .repeatable-card {
+        padding: 15px;
+    }
+
+    .repeatable-card-header {
+        flex-wrap: wrap;
+    }
+}
+
+/* ==========================================================
+   FINAL RESUME STUDIO POLISH — SECTION ACTIONS
+   Keeps repeatable-item actions on one clean horizontal line.
+========================================================== */
+
+.editor-card .section-title-copy {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.editor-card .card-title p {
+    margin: 0;
+    color: #111827;
+    font-size: 14px;
+    line-height: 1.3;
+}
+
+.editor-card .card-title h2+p {
+    max-width: 340px;
+}
+
+.editor-card .card-actions {
+    flex-shrink: 0;
+}
+
+.editor-card .card-actions .primary-btn,
+.editor-card .card-actions .secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 36px;
+    padding: 7px 12px;
+    border-radius: 9px;
+    font-size: 12px;
+    font-weight: 650;
+    white-space: nowrap;
+    border: 1px solid #ddd8ff;
+    background: #f6f3ff;
+    color: #6d4aff;
+    cursor: pointer;
+    transition: background .18s ease, border-color .18s ease, transform .18s ease;
+}
+
+.editor-card .card-actions .primary-btn:hover,
+.editor-card .card-actions .secondary-btn:hover {
+    background: #eee9ff;
+    border-color: #cfc5ff;
+    transform: translateY(-1px);
+}
+
+.editor-card .card-actions .primary-btn i,
+.editor-card .card-actions .secondary-btn i {
+    width: 16px;
+    height: 16px;
+}
+
+/* Repeatable entries: title + delete + collapse always share one row. */
+.education-item,
+.project-item,
+.experience-item,
+.certification-item {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #fafbfc;
+}
+
+.education-item+.education-item,
+.project-item+.project-item,
+.experience-item+.experience-item,
+.certification-item+.certification-item {
+    margin-top: 14px;
+}
+
+.education-header,
+.project-header,
+.experience-header,
+.certification-header {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+    min-height: 34px;
+}
+
+.education-header h3,
+.project-header h3,
+.experience-header h3,
+.certification-header h3 {
+    min-width: 0;
+    margin: 0;
+    color: #111827;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.project-header .toggle-project-btn,
+.experience-header .toggle-experience-btn,
+.certification-header .toggle-certification-btn {
+    grid-column: 1;
+}
+
+.project-header h3,
+.experience-header h3,
+.certification-header h3 {
+    grid-column: 2;
+}
+
+.project-header .remove-project-btn,
+.experience-header .remove-experience-btn,
+.certification-header .remove-certification-btn {
+    grid-column: 3;
+}
+
+.education-header h3 {
+    grid-column: 1 / 3;
+}
+
+.education-header .remove-education-btn {
+    grid-column: 3;
+}
+
+.education-header button,
+.project-header button,
+.experience-header button,
+.certification-header button,
+.remove-bullet-btn,
+.remove-responsibility-btn,
+.remove-tech-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: background .18s ease, color .18s ease;
+}
+
+.education-header button:hover,
+.project-header button:hover,
+.experience-header button:hover,
+.certification-header button:hover,
+.remove-bullet-btn:hover,
+.remove-responsibility-btn:hover,
+.remove-tech-btn:hover {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.education-header button i,
+.project-header button i,
+.experience-header button i,
+.certification-header button i,
+.remove-bullet-btn i,
+.remove-responsibility-btn i,
+.remove-tech-btn i {
+    width: 17px;
+    height: 17px;
+}
+
+/* Skills: category title and Add action share the same row. */
+.skills-category {
+    padding: 2px 0 18px;
+}
+
+.skills-category+.skills-category {
+    padding-top: 16px;
+}
+
+.skills-category>.category-heading,
+.skills-category>h3 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0 0 10px;
+}
+
+.skills-category>h3 {
+    color: #111827;
+    font-size: 16px;
+    line-height: 1.3;
+}
+
+.skills-category .skill-input-row,
+.project-item .tech-input-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+}
+
+.skills-category .skill-input-row .add-skill-btn,
+.project-item .tech-input-row .add-tech-btn {
+    min-width: 62px;
+    height: 42px;
+    padding: 0 13px;
+    border: 1px solid #ddd8ff;
+    border-radius: 9px;
+    background: #f6f3ff;
+    color: #6d4aff;
+    font-size: 12px;
+    font-weight: 650;
+    cursor: pointer;
+}
+
+.skills-category .skill-input-row .add-skill-btn:hover,
+.project-item .tech-input-row .add-tech-btn:hover {
+    background: #eee9ff;
+    border-color: #cfc5ff;
+}
+
+.skills-category hr,
+.education-item hr,
+.project-item hr,
+.experience-item hr,
+.certification-item hr {
+    border: 0;
+    border-top: 1px solid #e8ebef;
+    margin: 18px 0 0;
+}
+
+/* Labels with secondary actions — action sits on the right of the label. */
+.form-group>.field-label-row,
+.project-item .form-group:has(.add-bullet-btn)>label,
+.experience-item .form-group:has(.add-responsibility-btn)>label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.project-item .form-group:has(.add-tech-btn)>label {
+    margin-bottom: 8px;
+}
+
+.project-item .add-bullet-btn,
+.experience-item .add-responsibility-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 32px;
+    margin: 0 0 8px auto;
+    padding: 6px 10px;
+    border: 1px solid #e2e5ea;
+    border-radius: 8px;
+    background: #fff;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.project-item .add-bullet-btn:hover,
+.experience-item .add-responsibility-btn:hover {
+    border-color: #d6ccff;
+    background: #f8f6ff;
+    color: #6d4aff;
+}
+
+.project-item .add-bullet-btn i,
+.experience-item .add-responsibility-btn i {
+    width: 15px;
+    height: 15px;
+}
+
+.bullet-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 32px;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 9px;
+}
+
+.bullet-row .remove-bullet-btn,
+.bullet-row .remove-responsibility-btn {
+    width: 32px;
+    height: 32px;
+}
+
+/* Header actions should never collapse into a second line on desktop. */
+@media (min-width: 769px) {
+    .editor-card>.card-header {
+        flex-wrap: nowrap;
+    }
+
+    .editor-card .card-title {
+        flex: 1 1 auto;
+    }
+}
+
+/* ==========================================================
+   STUDIO HEADER — FINAL COMPACT VERSION
+========================================================== */
+
+.resume-studio .studio-header {
+    min-height: 74px;
+    height: 74px;
+    padding: 7px 20px;
+    gap: 12px;
+}
+
+.resume-studio .studio-header-left {
+    gap: 10px;
+}
+
+.resume-studio .studio-brand-name {
+    font-size: 19px;
+}
+
+.resume-studio .studio-header-center {
+    gap: 1px;
+}
+
+.resume-studio .studio-header-center .resume-title {
+    max-width: 320px;
+    padding: 0 6px;
+    font-size: 24px;
+    line-height: 1.15;
+}
+
+.resume-studio .studio-header-right {
+    gap: 7px;
+}
+
+.resume-studio .studio-header-right .studio-action-btn {
+    min-height: 38px;
+    padding: 0 13px;
+}
+
+.resume-studio .studio-header-right .save-status {
+    font-size: 12px;
+}
+
+@media (max-width: 1100px) {
+    .resume-studio .studio-header {
+        height: 72px;
+        min-height: 72px;
+    }
+
+    .resume-studio .studio-header-center .resume-title {
+        font-size: 21px;
+    }
+}
+
+/* Action buttons moved into their field/category heading rows. */
+.skills-category .category-heading .add-skill-btn,
+.project-item .field-label-row .add-tech-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    min-width: 58px;
+    height: 32px;
+    padding: 0 11px;
+    border: 1px solid #ddd8ff;
+    border-radius: 8px;
+    background: #f6f3ff;
+    color: #6d4aff;
+    font-size: 12px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: background .18s ease, border-color .18s ease, transform .18s ease;
+}
+
+.skills-category .category-heading .add-skill-btn:hover,
+.project-item .field-label-row .add-tech-btn:hover {
+    background: #eee9ff;
+    border-color: #cfc5ff;
+    transform: translateY(-1px);
+}
+
+
+/* ==========================================================
+   FINAL POLISH — EXPERIENCE / SKILLS / PROJECT TAGS
+========================================================== */
+
+/* Experience: keep the current-job control visually attached to
+   the start-date row instead of floating between rows. */
+.experience-item .form-row:has(+ .form-group .current-job-checkbox) {
+    margin-bottom: 4px;
+}
+
+.experience-item .form-group:has(.current-job-checkbox) {
+    margin: -2px 0 14px;
+}
+
+.experience-item .checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 34px;
+    padding: 7px 11px;
+    border: 1px solid #e2e5ea;
+    border-radius: 9px;
+    background: #f8fafc;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.experience-item .checkbox-label input {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    accent-color: #6d4aff;
+}
+
+.experience-item .add-responsibility-btn {
+    margin-left: auto;
+    margin-bottom: 0;
+    min-height: 34px;
+    padding: 6px 12px;
+    border-color: #d8d0ff;
+    background: #f4f1ff;
+    color: #6d4aff;
+}
+
+.experience-item .add-responsibility-btn:hover {
+    background: #eae5ff;
+    border-color: #c9bfff;
+    color: #5b3ff1;
+}
+
+/* Skills and project technology controls get breathing room. */
+.skills-category .category-heading,
+.project-item .field-label-row {
+    padding-right: 2px;
+}
+
+.skills-category .category-heading .add-skill-btn,
+.project-item .field-label-row .add-tech-btn {
+    margin-left: 16px;
+    min-width: 62px;
+    height: 34px;
+    padding: 0 13px;
+    border: 1px solid #d8d0ff;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #f3efff, #faf9ff);
+    color: #6846f5;
+    box-shadow: 0 3px 10px rgba(109, 74, 255, .08);
+}
+
+.skills-category .category-heading .add-skill-btn:hover,
+.project-item .field-label-row .add-tech-btn:hover {
+    background: #ebe6ff;
+    border-color: #c8bcff;
+    box-shadow: 0 5px 14px rgba(109, 74, 255, .14);
+}
+
+/* Consistent, product-like chips for entered skills / technologies. */
+.skills-tags,
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    min-height: 0;
+}
+
+.skill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    max-width: 100%;
+    padding: 6px 9px 6px 11px;
+    border: 1px solid #ddd8ff;
+    border-radius: 999px;
+    background: #f5f2ff;
+    color: #5b3fcf;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.skill-tag .remove-skill-btn,
+.skill-tag .remove-tech-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(109, 74, 255, .08);
+    color: #8068e8;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.skill-tag .remove-skill-btn:hover,
+.skill-tag .remove-tech-btn:hover {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.skills-category hr {
+    margin-top: 18px;
+    margin-bottom: 2px;
+}
+
+/* Project technology input and chips are intentionally separated
+   from the action button for a calmer hierarchy. */
+.project-item .tech-input-row {
+    display: block;
+}
+
+.project-item .tech-input-row .tech-input {
+    width: 100%;
+}
+
+.project-item .tech-tags {
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+.project-item .add-bullet-btn {
+    margin-left: auto;
+    margin-bottom: 0;
+    min-height: 34px;
+    padding: 6px 12px;
+    border-color: #d8d0ff;
+    background: #f4f1ff;
+    color: #6d4aff;
+}
+
+.project-item .add-bullet-btn:hover {
+    background: #eae5ff;
+    border-color: #c9bfff;
+    color: #5b3ff1;
+}
+
+.project-item .bullet-row,
+.experience-item .bullet-row {
+    margin-top: 9px;
+}
+
+/* Give repeatable entries enough breathing room. */
+.education-item,
+.project-item,
+.experience-item,
+.certification-item {
+    padding: 20px;
+    gap: 18px;
+}
+
+.education-item+.education-item,
+.project-item+.project-item,
+.experience-item+.experience-item,
+.certification-item+.certification-item {
+    margin-top: 18px;
+}
+
+/* Compact studio header: all content stays inside one clean bar. */
+.resume-studio .studio-header {
+    min-height: 68px;
+    height: 68px;
+    padding: 6px 18px;
+    grid-template-columns: minmax(210px, 1fr) minmax(320px, 420px) minmax(300px, 1fr);
+    gap: 12px;
+}
+
+.resume-studio .studio-header-center {
+    gap: 0;
+}
+
+.resume-studio .studio-header-center .resume-title {
+    max-width: 360px;
+    font-size: 23px;
+    line-height: 1.05;
+    padding: 0 4px;
+}
+
+.resume-studio .resume-meta {
+    gap: 14px;
+    margin-top: 1px;
+}
+
+.resume-studio .meta-item {
+    font-size: 11.5px;
+}
+
+.resume-studio .meta-item i {
+    width: 16px;
+    height: 16px;
+}
+
+.resume-studio .studio-header-right {
+    gap: 8px;
+}
+
+.resume-studio .studio-header-right .studio-action-btn {
+    min-width: 40px;
+    min-height: 36px;
+    height: 36px;
+}
+
+.resume-studio .studio-header-right .save-status {
+    margin-right: 2px;
+}
+
+@media (max-width: 1400px) and (min-width: 1101px) {
+    .resume-studio .studio-header {
+        grid-template-columns: 190px minmax(300px, 1fr) 220px;
+        gap: 8px;
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .resume-studio .studio-header-center .resume-title {
+        font-size: 21px;
+    }
+
+    .resume-studio .studio-header-right .studio-action-btn span {
+        display: none;
+    }
+
+    .resume-studio .studio-header-right .studio-action-btn {
+        width: 38px;
+        padding: 0;
+    }
+}
+
+/* ==========================================================
+   NOVUS - RESUME STUDIO HEADER
+========================================================== */
+
+.editor-header {
+
+    display: grid;
+
+    grid-template-columns: 1fr auto 1fr;
+
+    align-items: center;
+
+    width: 100%;
+
+    min-height: 82px;
+
+    padding: 10px 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 0 0 16px 16px;
+
+    box-sizing: border-box;
+
+}
+
+
+/* ----------------------------------------------------------
+   LEFT BRAND
+---------------------------------------------------------- */
+
+.header-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    gap: 12px;
+
+    min-width: 0;
+
+}
+
+
+.studio-menu-btn {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 40px;
+
+    height: 40px;
+
+    padding: 0;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe1ea;
+
+    border-radius: 10px;
+
+    color: #111827;
+
+    cursor: pointer;
+
+}
+
+
+.studio-menu-btn:hover {
+
+    background: #f8fafc;
+
+}
+
+
+.studio-menu-btn svg {
+
+    width: 21px;
+
+    height: 21px;
+
+}
+
+
+.studio-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    white-space: nowrap;
+
+}
+
+
+.brand-symbol {
+
+    color: #6d4aff;
+
+    font-size: 22px;
+
+    line-height: 1;
+
+}
+
+
+.brand-name {
+
+    color: #111827;
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+}
+
+
+/* ----------------------------------------------------------
+   CENTER
+---------------------------------------------------------- */
+
+.header-center {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 260px;
+
+}
+
+
+.header-center .resume-title {
+
+    width: auto;
+
+    min-width: 220px;
+
+    max-width: 420px;
+
+    padding: 0;
+
+    margin: 0;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #111827;
+
+    text-align: center;
+
+    font-size: 27px;
+
+    font-weight: 700;
+
+    line-height: 1.15;
+
+}
+
+
+.header-center .resume-title:focus {
+
+    border: none;
+
+    outline: none;
+
+    box-shadow: none;
+
+}
+
+
+.header-center .resume-meta {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 18px;
+
+    margin-top: 5px;
+
+}
+
+
+/* ----------------------------------------------------------
+   RIGHT ACTIONS
+---------------------------------------------------------- */
+
+.header-right {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    min-width: 0;
+
+}
+
+
+.header-right .btn {
+
+    height: 42px;
+
+    white-space: nowrap;
+
+}
+
+
+.save-status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    min-width: 64px;
+
+    margin-left: 2px;
+
+    color: #475569;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    white-space: nowrap;
+
+}
+
+
+.save-status-icon {
+
+    width: 16px;
+
+    height: 16px;
+
+    color: #22c55e;
+
+    stroke-width: 2.5;
+
+}
+
+
+.save-status.is-saving {
+
+    color: #64748b;
+
+}
+
+
+.save-status.is-saving .save-status-icon {
+
+    color: #64748b;
+
+    animation: novus-save-spin .9s linear infinite;
+
+}
+
+
+.save-status.is-saved .save-status-icon {
+
+    color: #22c55e;
+
+}
+
+
+.save-status.is-offline,
+.save-status.is-error {
+
+    color: #dc2626;
+
+}
+
+
+.save-status.is-offline .save-status-icon,
+.save-status.is-error .save-status-icon {
+
+    color: #dc2626;
+
+}
+
+
+@keyframes novus-save-spin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* ----------------------------------------------------------
+   RESPONSIVE
+---------------------------------------------------------- */
+
+@media (max-width: 900px) {
+
+    .editor-header {
+
+        grid-template-columns: auto 1fr auto;
+
+        padding: 10px 14px;
+
+    }
+
+
+    .brand-name {
+
+        display: none;
+
+    }
+
+
+    .header-center .resume-title {
+
+        font-size: 23px;
+
+        max-width: 280px;
+
+    }
+
+
+    .header-center .resume-meta {
+
+        gap: 10px;
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .editor-header {
+
+        grid-template-columns: auto 1fr auto;
+
+    }
+
+
+    .header-center .resume-meta {
+
+        display: none;
+
+    }
+
+
+    .header-center .resume-title {
+
+        font-size: 20px;
+
+        min-width: 0;
+
+        max-width: 220px;
+
+    }
+
+
+    .header-right .btn {
+
+        width: 40px;
+
+        padding: 0;
+
+    }
+
+
+    .header-right .btn svg {
+
+        margin: 0;
+
+    }
+
+
+    .header-right .btn {
+
+        font-size: 0;
+
+    }
+
+
+    .header-right .btn svg {
+
+        width: 19px;
+
+        height: 19px;
+
+    }
+
+
+    .save-status {
+
+        min-width: auto;
+
+    }
+
+
+    .save-status span {
+
+        display: none;
+
+    }
+
+}

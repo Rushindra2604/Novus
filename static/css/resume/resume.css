@@ -1,0 +1,487 @@
+/* ==========================================================
+   NOVUS RESUME STUDIO — STABLE THREE COLUMN LAYOUT
+========================================================== */
+
+.dashboard-layout:has(.resume-studio) {
+    min-height: 100vh;
+}
+
+.dashboard-layout:has(.resume-studio) .dashboard-main {
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+}
+
+.resume-studio {
+    width: 100%;
+    min-width: 0;
+    min-height: 100vh;
+    background: #f8fafc;
+    color: var(--text-primary);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.studio-header {
+    width: 100%;
+    min-height: 78px;
+    display: grid;
+    grid-template-columns: minmax(250px, 1fr) minmax(280px, 340px) minmax(300px, 1fr);
+    align-items: center;
+    gap: 14px;
+    padding: 9px 20px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, .05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.studio-header-left,
+.studio-header-right,
+.studio-header-center {
+    min-width: 0;
+}
+
+.studio-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.studio-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #111827;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.studio-brand-icon {
+    color: #6d4aff;
+    font-size: 24px;
+    line-height: 1;
+}
+
+.studio-brand-name {
+    font-size: 20px;
+    font-weight: 750;
+}
+
+.studio-header-divider {
+    width: 1px;
+    height: 24px;
+    background: #e5e7eb;
+}
+
+.studio-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #64748b;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.studio-back:hover {
+    color: #6d4aff;
+}
+
+.studio-header-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+
+.resume-title {
+    width: 100%;
+    max-width: 330px;
+    box-sizing: border-box;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    text-align: center;
+    color: #111827;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 3px 8px;
+}
+
+.resume-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #64748b;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.meta-item strong {
+    color: #111827;
+    margin-left: 3px;
+}
+
+.studio-header-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.studio-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 40px;
+    white-space: nowrap;
+}
+
+.save-status {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    margin-right: 2px;
+}
+
+/* =========================
+   STUDIO NAVIGATION DRAWER
+========================= */
+
+.studio-nav-toggle {
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #fff;
+    color: #111827;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.studio-nav-toggle:hover {
+    border-color: #d8d1ff;
+    color: #6d4aff;
+    background: #faf9ff;
+}
+
+.studio-nav-toggle i,
+.studio-nav-close i {
+    width: 19px;
+    height: 19px;
+}
+
+.studio-nav-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1200;
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    padding: 22px 18px;
+    box-sizing: border-box;
+    background: #111827;
+    color: #fff;
+    box-shadow: 18px 0 45px rgba(15, 23, 42, .18);
+    transform: translateX(-105%);
+    transition: transform .25s ease;
+}
+
+.studio-nav-drawer.open {
+    transform: translateX(0);
+}
+
+.studio-nav-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2px 2px 28px;
+}
+
+.studio-drawer-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 21px;
+    font-weight: 750;
+}
+
+.studio-drawer-brand .studio-brand-icon {
+    color: #7c5cff;
+    font-size: 24px;
+}
+
+.studio-nav-close {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 10px;
+    background: rgba(255,255,255,.06);
+    color: #fff;
+    cursor: pointer;
+}
+
+.studio-nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.studio-nav-menu a,
+.studio-nav-drawer-footer a {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-height: 46px;
+    padding: 0 14px;
+    border-radius: 12px;
+    color: #e5e7eb;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: .2s ease;
+}
+
+.studio-nav-menu a:hover,
+.studio-nav-drawer-footer a:hover {
+    background: rgba(124,92,255,.16);
+    color: #fff;
+}
+
+.studio-nav-menu i,
+.studio-nav-drawer-footer i {
+    width: 19px;
+    height: 19px;
+    flex-shrink: 0;
+}
+
+.studio-nav-disabled {
+    opacity: .62;
+}
+
+.studio-nav-drawer-footer {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,.1);
+}
+
+.studio-nav-drawer-footer a:hover {
+    background: rgba(239,68,68,.16);
+    color: #fff;
+}
+
+.studio-nav-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1190;
+    background: rgba(15,23,42,.34);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease;
+}
+
+.studio-nav-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+body.studio-nav-open {
+    overflow: hidden;
+}
+
+/* =========================
+   THREE COLUMN WORKSPACE
+========================= */
+
+.studio-workspace {
+    display: grid;
+    grid-template-columns: 220px minmax(0, .95fr) minmax(460px, 1.05fr);
+    gap: 18px;
+    width: 100%;
+    padding: 18px 20px 40px;
+    box-sizing: border-box;
+    align-items: start;
+}
+
+/* Left and right stay visible during page scrolling.
+   They do NOT have their own scrollbars. */
+.studio-sections,
+.studio-preview {
+    position: sticky;
+    top: 86px;
+    align-self: start;
+    min-width: 0;
+    height: max-content;
+    max-height: none;
+    overflow: visible;
+}
+
+.sections-panel,
+.studio-preview .preview-panel {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    box-sizing: border-box;
+}
+
+.sections-panel {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+}
+
+.studio-editor {
+    min-width: 0;
+    width: 100%;
+}
+
+.resume-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    min-width: 0;
+}
+
+/* Prevent long editor content from forcing horizontal overflow. */
+.studio-editor,
+.resume-sections,
+.resume-sections .editor-card,
+.resume-sections .card-content {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1400px) {
+    .studio-workspace {
+        grid-template-columns: 210px minmax(0, .95fr) minmax(440px, 1.05fr);
+        gap: 14px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .studio-header {
+        grid-template-columns: minmax(220px, 1fr) minmax(250px, 300px) minmax(270px, 1fr);
+        gap: 10px;
+    }
+
+    .studio-action-btn span {
+        display: none;
+    }
+
+    .studio-action-btn {
+        width: 40px;
+        padding: 0;
+    }
+}
+
+@media (max-width: 1040px) {
+    .studio-header {
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "left right"
+            "center center";
+    }
+
+    .studio-header-left { grid-area: left; }
+    .studio-header-right { grid-area: right; }
+    .studio-header-center { grid-area: center; }
+
+    .studio-workspace {
+        grid-template-columns: 210px minmax(0, 1fr);
+    }
+
+    .studio-preview {
+        position: sticky;
+        grid-column: 1 / -1;
+        top: 86px;
+    }
+}
+
+@media (max-width: 768px) {
+    .studio-header {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 12px 14px;
+    }
+
+    .studio-header-left {
+        justify-content: space-between;
+    }
+
+    .studio-header-center {
+        align-items: flex-start;
+    }
+
+    .resume-title {
+        text-align: left;
+        max-width: none;
+    }
+
+    .resume-meta {
+        justify-content: flex-start;
+    }
+
+    .studio-header-right {
+        justify-content: flex-start;
+    }
+
+    .studio-action-btn span {
+        display: inline;
+    }
+
+    .studio-action-btn {
+        width: auto;
+        flex: 1;
+        padding: 0 12px;
+    }
+
+    .studio-workspace {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        padding: 12px;
+    }
+
+    .studio-sections,
+    .studio-preview {
+        position: static;
+        width: 100%;
+    }
+}

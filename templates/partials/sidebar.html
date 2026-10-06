@@ -1,0 +1,312 @@
+<aside class="sidebar" data-sidebar>
+
+    <!-- =========================
+         SIDEBAR HEADER
+    ========================== -->
+    <div class="sidebar-logo">
+
+        <a href="/dashboard"
+           class="sidebar-brand"
+           aria-label="Novus Dashboard">
+
+            <span class="sidebar-brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+
+                    <path
+                        d="M12 2.8L14.2 9.8L21.2 12L14.2 14.2L12 21.2L9.8 14.2L2.8 12L9.8 9.8L12 2.8Z"
+                        fill="currentColor"/>
+                </svg>
+            </span>
+
+            <span class="sidebar-brand-name">
+                Novus
+            </span>
+
+        </a>
+
+
+        <!-- Desktop collapse button -->
+        <button
+            class="sidebar-collapse-btn"
+            type="button"
+            data-sidebar-collapse
+            aria-label="Collapse sidebar"
+            title="Collapse sidebar">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 aria-hidden="true">
+
+                <path d="m15 18-6-6 6-6"/>
+
+            </svg>
+
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         MAIN NAVIGATION
+    ========================== -->
+    <nav
+        class="sidebar-nav"
+        aria-label="Main navigation">
+
+
+        <!-- Dashboard -->
+        <a
+            href="/dashboard"
+            class="sidebar-link"
+            data-tooltip="Dashboard"
+            data-path="/dashboard">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 aria-hidden="true">
+
+                <rect x="3" y="3" width="7" height="7" rx="1"/>
+                <rect x="14" y="3" width="7" height="7" rx="1"/>
+                <rect x="3" y="14" width="7" height="7" rx="1"/>
+                <rect x="14" y="14" width="7" height="7" rx="1"/>
+
+            </svg>
+
+            <span class="sidebar-link-label">
+                Dashboard
+            </span>
+
+        </a>
+
+
+        <!-- =========================
+             RESUME
+        ========================== -->
+
+        <div class="sidebar-section-label">
+            Resume
+        </div>
+
+
+        <!-- Resume Studio -->
+        <!-- /resume/<id> is also considered active -->
+        <a
+            href="/resume/new"
+            class="sidebar-link"
+            data-tooltip="Resume Studio"
+            data-prefix="/resume/">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 aria-hidden="true">
+
+                <path
+                    d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/>
+
+                <path d="M14 2v6h6"/>
+
+                <path d="M8 13h8"/>
+                <path d="M8 17h6"/>
+
+            </svg>
+
+            <span class="sidebar-link-label">
+                Resume Studio
+            </span>
+
+        </a>
+
+
+        <!-- My Resumes -->
+        <a
+            href="/my-resumes"
+            class="sidebar-link"
+            data-tooltip="My Resumes"
+            data-path="/my-resumes">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 aria-hidden="true">
+
+                <path d="M4 4h16v16H4z"/>
+
+                <path d="M8 8h8"/>
+                <path d="M8 12h8"/>
+                <path d="M8 16h5"/>
+
+            </svg>
+
+            <span class="sidebar-link-label">
+                My Resumes
+            </span>
+
+        </a>
+
+
+        <!-- =========================
+             CAREER TOOLS
+        ========================== -->
+
+        <div class="sidebar-section-label">
+            Career Tools
+        </div>
+
+
+        <!-- ATS Analyzer -->
+        <a
+            href="/analyzer"
+            class="sidebar-link"
+            data-tooltip="ATS Analyzer"
+            data-path="/analyzer">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 aria-hidden="true">
+
+                <circle cx="11" cy="11" r="7"/>
+
+                <path d="m20 20-4-4"/>
+
+                <path d="M11 7v8"/>
+                <path d="M7 11h8"/>
+
+            </svg>
+
+            <span class="sidebar-link-label">
+                ATS Analyzer
+            </span>
+
+        </a>
+
+
+        <!-- Insights -->
+        <a
+            href="/insights"
+            class="sidebar-link"
+            data-tooltip="Insights"
+            data-path="/insights">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 aria-hidden="true">
+
+                <path d="M4 19V5"/>
+                <path d="M4 19h17"/>
+
+                <path d="M8 15v-4"/>
+                <path d="M12 15V8"/>
+                <path d="M16 15v-6"/>
+                <path d="M20 15v-9"/>
+
+            </svg>
+
+            <span class="sidebar-link-label">
+                Insights
+            </span>
+
+        </a>
+
+    </nav>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+    <div class="sidebar-footer">
+
+        <a
+            href="/logout"
+            class="logout-btn sidebar-link"
+            data-tooltip="Logout">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 aria-hidden="true">
+
+                <path
+                    d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+
+                <path d="m16 17 5-5-5-5"/>
+
+                <path d="M21 12H9"/>
+
+            </svg>
+
+            <span class="sidebar-link-label">
+                Logout
+            </span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- Mobile backdrop -->
+<div
+    class="sidebar-backdrop"
+    data-sidebar-backdrop>
+</div>
+
+
+<!-- Mobile hamburger -->
+<button
+    class="sidebar-mobile-toggle"
+    type="button"
+    data-sidebar-mobile
+    aria-label="Open navigation"
+    title="Open navigation">
+
+    <svg viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         aria-hidden="true">
+
+        <path d="M4 6h16"/>
+        <path d="M4 12h16"/>
+        <path d="M4 18h16"/>
+
+    </svg>
+
+</button>
+
+
+<!-- Shared sidebar behavior -->
+<script
+    defer
+    src="{{ url_for('static', filename='js/sidebar.js') }}">
+</script>

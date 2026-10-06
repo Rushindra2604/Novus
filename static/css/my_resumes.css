@@ -1,0 +1,600 @@
+/* ==========================================================
+   NOVUS - MY RESUMES
+   Resume grid + delete menu/modal
+========================================================== */
+
+/* ---------- Page ---------- */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.page-header h1 {
+    margin: 0 0 8px;
+    font-size: 34px;
+    line-height: 1.15;
+}
+
+.page-header p {
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+.toolbar {
+    margin-bottom: 30px;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 420px;
+    padding: 14px 18px;
+    border: 1px solid #d9dfe8;
+    border-radius: 12px;
+    background: #fff;
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.search-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(109, 74, 255, .10);
+}
+
+/* ==========================================================
+   RESUME GRID
+   Explicit layouts for 1 / 2 / 3+ resumes.
+========================================================== */
+
+.resume-grid {
+    display: grid;
+    width: 100%;
+    gap: 20px;
+    align-items: stretch;
+}
+
+/* One resume = one full-width card */
+.resume-grid.resume-count-1 {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+/* Two resumes = two balanced cards */
+.resume-grid.resume-count-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Three resumes = three balanced cards */
+.resume-grid.resume-count-3,
+.resume-grid.resume-count-4,
+.resume-grid.resume-count-5,
+.resume-grid.resume-count-6 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* 7+ resumes continue as a clean 3-column grid */
+.resume-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.resume-grid.resume-count-1 {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.resume-grid.resume-count-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* ==========================================================
+   RESUME CARD
+========================================================== */
+
+.resume-list-card {
+    position: relative;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    column-gap: 16px;
+    row-gap: 12px;
+    padding: 22px;
+    box-sizing: border-box;
+
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+
+    box-shadow: 0 5px 18px rgba(15, 23, 42, .05);
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.resume-list-card:hover {
+    transform: translateY(-2px);
+    border-color: #d8d0ff;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, .09);
+}
+
+.resume-card-icon {
+    grid-column: 1;
+    grid-row: 1;
+    width: 46px;
+    height: 46px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 12px;
+    background: #f1edff;
+    color: var(--primary);
+}
+
+.resume-card-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.resume-card-content {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+}
+
+.resume-number-label {
+    display: inline-block;
+    margin-bottom: 5px;
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.resume-card-content h3 {
+    margin: 0 0 5px;
+    color: #111827;
+    font-size: 17px;
+    line-height: 1.3;
+    font-weight: 700;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.resume-card-content p {
+    margin: 0;
+    color: #718096;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.resume-card-progress {
+    grid-column: 1 / -1;
+    grid-row: 2;
+
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+
+    color: #64748b;
+    font-size: 13px;
+}
+
+.resume-card-progress strong {
+    color: #111827;
+    font-size: 15px;
+}
+
+.resume-card-actions {
+    grid-column: 1 / -1;
+    grid-row: 3;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.resume-card-actions .btn {
+    min-height: 42px;
+    box-sizing: border-box;
+}
+
+/* With one resume, use the extra width without making the card awkward */
+.resume-grid.resume-count-1 .resume-list-card {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    column-gap: 18px;
+    align-items: center;
+}
+
+.resume-grid.resume-count-1 .resume-card-progress {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+}
+
+.resume-grid.resume-count-1 .resume-card-actions {
+    grid-column: 1 / -1;
+    grid-row: 2;
+}
+
+/* Two-card layout: keep cards comfortable rather than stretched */
+.resume-grid.resume-count-2 .resume-list-card {
+    min-height: 190px;
+}
+
+/* Three-card layout */
+.resume-grid.resume-count-3 .resume-list-card {
+    min-height: 190px;
+}
+
+/* ==========================================================
+   THREE-DOT MENU
+========================================================== */
+
+.resume-menu-trigger {
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    border: 1px solid #dbe2ea;
+    border-radius: 10px;
+    background: #fff;
+    color: #64748b;
+
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.resume-menu-trigger:hover,
+.resume-menu-trigger[aria-expanded="true"] {
+    border-color: #c4b5fd;
+    background: #f5f3ff;
+    color: var(--primary);
+}
+
+.resume-menu-trigger svg {
+    width: 18px;
+    height: 18px;
+}
+
+.resume-action-menu {
+    position: absolute;
+    z-index: 50;
+    left: 0;
+    top: calc(100% + 8px);
+
+    min-width: 170px;
+    padding: 6px;
+
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 14px 35px rgba(15, 23, 42, .14);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-5px);
+
+    transition:
+        opacity .16s ease,
+        transform .16s ease,
+        visibility .16s ease;
+}
+
+.resume-action-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.resume-delete-menu-item {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 10px 11px;
+
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+
+    color: #dc2626;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.resume-delete-menu-item:hover {
+    background: #fef2f2;
+}
+
+.resume-delete-menu-item svg {
+    width: 17px;
+    height: 17px;
+}
+
+/* ==========================================================
+   DELETE MODAL
+========================================================== */
+
+body.modal-open {
+    overflow: hidden;
+}
+
+.delete-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity .2s ease, visibility .2s ease;
+}
+
+.delete-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.delete-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, .48);
+    backdrop-filter: blur(3px);
+}
+
+.delete-modal-card {
+    position: relative;
+    width: min(430px, 100%);
+    padding: 32px;
+
+    background: #fff;
+    border: 1px solid rgba(226, 232, 240, .9);
+    border-radius: 20px;
+
+    box-shadow: 0 24px 70px rgba(15, 23, 42, .22);
+
+    text-align: center;
+
+    transform: translateY(10px) scale(.98);
+    transition: transform .2s ease;
+}
+
+.delete-modal.is-open .delete-modal-card {
+    transform: translateY(0) scale(1);
+}
+
+.delete-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+
+    width: 34px;
+    height: 34px;
+
+    display: grid;
+    place-items: center;
+
+    border: 0;
+    border-radius: 9px;
+    background: transparent;
+    color: #94a3b8;
+
+    cursor: pointer;
+}
+
+.delete-modal-close:hover {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.delete-modal-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 18px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 16px;
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.delete-modal-icon svg {
+    width: 25px;
+    height: 25px;
+}
+
+.delete-modal-card h2 {
+    margin: 0 0 9px;
+    color: #0f172a;
+    font-size: 22px;
+}
+
+.delete-modal-card p {
+    margin: 0 auto;
+    max-width: 340px;
+
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.delete-modal-card p strong {
+    color: #334155;
+}
+
+.delete-modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 26px;
+}
+
+.delete-cancel-btn,
+.delete-confirm-btn {
+    min-height: 42px;
+    padding: 0 17px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.delete-cancel-btn {
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    color: #475569;
+}
+
+.delete-cancel-btn:hover {
+    background: #f8fafc;
+}
+
+.delete-confirm-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    border: 1px solid #dc2626;
+    background: #dc2626;
+    color: #fff;
+}
+
+.delete-confirm-btn:hover {
+    background: #b91c1c;
+    border-color: #b91c1c;
+}
+
+.delete-confirm-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ==========================================================
+   EMPTY STATE
+========================================================== */
+
+.empty-state-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 70px 40px;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.empty-icon {
+    font-size: 56px;
+    margin-bottom: 20px;
+}
+
+.empty-state-card h2 {
+    margin-bottom: 12px;
+}
+
+.empty-state-card p {
+    max-width: 500px;
+    margin: 0 auto 30px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 1100px) {
+
+    .resume-grid,
+    .resume-grid.resume-count-3,
+    .resume-grid.resume-count-4,
+    .resume-grid.resume-count-5,
+    .resume-grid.resume-count-6 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .resume-grid.resume-count-1 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 760px) {
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .search-input {
+        max-width: 100%;
+    }
+
+    .resume-grid,
+    .resume-grid.resume-count-1,
+    .resume-grid.resume-count-2,
+    .resume-grid.resume-count-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .resume-grid.resume-count-1 .resume-list-card {
+        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-rows: auto auto auto;
+    }
+
+    .resume-grid.resume-count-1 .resume-card-progress {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-self: start;
+    }
+
+    .resume-grid.resume-count-1 .resume-card-actions {
+        grid-column: 1 / -1;
+        grid-row: 3;
+    }
+
+    .delete-modal-card {
+        padding: 28px 20px 22px;
+    }
+
+    .delete-modal-actions {
+        flex-direction: column-reverse;
+    }
+
+    .delete-cancel-btn,
+    .delete-confirm-btn {
+        width: 100%;
+    }
+}

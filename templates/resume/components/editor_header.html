@@ -1,0 +1,105 @@
+<section class="editor-header">
+
+    <!-- LEFT: NOVUS BRAND + NAVIGATION -->
+    <div class="header-brand">
+
+        <button type="button" class="studio-nav-toggle" id="studioNavToggle" aria-label="Open navigation"
+            aria-expanded="false" title="Navigation">
+        
+            <i data-lucide="menu"></i>
+        
+        </button>
+
+        <a href="{{ url_for('auth.dashboard') }}" class="studio-brand" title="Back to Dashboard">
+        
+            <span class="brand-symbol">✦</span>
+        
+            <span class="brand-name">Novus</span>
+        
+        </a>
+
+    </div>
+
+
+    <!-- CENTER: RESUME TITLE + META -->
+    <div class="header-center">
+
+        <input type="text" class="resume-title" value="{{ resume.title }}" placeholder="Untitled Resume">
+
+        <div class="resume-meta">
+
+            <div class="meta-item">
+
+                <i data-lucide="circle-check-big"></i>
+
+                <span>
+        
+                    Completion
+        
+                    <strong id="completionValue">
+        
+                        0%
+        
+                    </strong>
+        
+                </span>
+
+            </div>
+
+            <div class="meta-item">
+
+                <i data-lucide="clock-3"></i>
+
+                <span>
+
+                    Last Saved
+
+                    <strong id="lastSavedValue">
+
+                        Not Yet
+
+                    </strong>
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT: ACTIONS + SAVE STATUS -->
+    <div class="header-right">
+
+        <button type="button" class="btn btn-outline" id="previewResumeBtn" title="Preview resume">
+
+            <i data-lucide="eye"></i>
+
+            Preview
+
+        </button>
+
+        <button type="button" class="btn btn-outline" id="downloadResumeBtn" title="Download PDF">
+        
+            <i data-lucide="download"></i>
+        
+            PDF
+        
+        </button>
+
+        <div class="save-status is-saved" id="saveStatusContainer">
+
+            <i data-lucide="check" class="save-status-icon"></i>
+
+            <span id="saveStatus">
+
+                Saved
+
+            </span>
+
+        </div>
+
+    </div>
+
+</section>

@@ -1,0 +1,136 @@
+.auth-page{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f8fafc;
+    padding:60px 20px;
+}
+
+.auth-container{
+    width:1100px;
+    background:#fff;
+    border-radius:24px;
+    overflow:hidden;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+}
+
+.auth-left{
+    background:linear-gradient(135deg,#6D4AFF,#8B5CF6);
+    color:#fff;
+    padding:80px 60px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.auth-left h1{
+    font-size:42px;
+    margin-bottom:20px;
+}
+
+.auth-left p{
+    font-size:18px;
+    line-height:1.8;
+}
+
+.auth-right{
+    padding:70px 60px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.auth-card{
+    width:100%;
+}
+
+.auth-card h2{
+    margin-bottom:35px;
+    font-size:32px;
+}
+
+/* ==========================================
+   AUTH FLASH MESSAGES
+========================================== */
+
+.auth-flash-messages {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto 18px;
+}
+
+.auth-flash {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    padding: 8px 12px;
+    box-sizing: border-box;
+}
+
+.auth-flash-danger {
+    color: #dc2626;
+}
+
+.auth-flash-success {
+    color: #16a34a;
+}
+
+.input-group{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:22px;
+}
+
+.input-group label{
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+.input-group input{
+    padding:15px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    font-size:16px;
+    outline:none;
+}
+
+.input-group input:focus{
+    border-color:#6D4AFF;
+}
+
+.auth-btn{
+    width:100%;
+    margin-top:10px;
+}
+
+.auth-footer{
+    margin-top:25px;
+    text-align:center;
+}
+
+.auth-footer a{
+    color:#6D4AFF;
+    font-weight:600;
+}
+
+@media(max-width:900px){
+
+.auth-container{
+    grid-template-columns:1fr;
+}
+
+.auth-left{
+    display:none;
+}
+
+.auth-right{
+    padding:50px 30px;
+}
+
+}

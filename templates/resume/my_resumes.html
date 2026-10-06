@@ -1,0 +1,211 @@
+{% extends "layouts/dashboard_base.html" %}
+
+{% block title %}My Resumes | Novus{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/my_resumes.css') }}">
+{% endblock %}
+
+{% block dashboard_topbar %}
+{% endblock %}
+
+{% block dashboard_content %}
+
+<section class="page-header">
+    <div>
+        <h1>My Resumes</h1>
+        <p>Manage and organize your professional resumes.</p>
+    </div>
+
+    <a href="/resume/new" class="btn btn-primary">+ New Resume</a>
+</section>
+
+<section class="toolbar">
+    <input type="text" class="search-input" placeholder="Search resumes..." id="resumeSearch">
+</section>
+
+{% if resumes %}
+
+<section class="resume-grid resume-count-{{ resumes|length }}" id="resumeGrid">
+
+    {% for item in resumes %}
+    <article class="resume-list-card" data-title="{{ item['title']|lower }}">
+
+        <div class="resume-card-icon">
+            <i data-lucide="file-text"></i>
+        </div>
+
+        <div class="resume-card-content">
+            <span class="resume-number-label">
+                Resume {{ item['resume_number'] or loop.index }}
+            </span>
+            <h3>{{ item['title'] or 'Untitled Resume' }}</h3>
+            <p>
+                Updated {{ item['updated_at'] or item['created_at'] }}
+            </p>
+        </div>
+
+        <div class="resume-card-progress">
+            <strong>{{ item['completion'] or 0 }}%</strong>
+            <span>Complete</span>
+        </div>
+
+        <div class="resume-card-actions">
+            <a href="{{ url_for('resume.resume_studio', resume_id=item['id']) }}"
+               class="btn btn-outline">
+                Continue Editing
+            </a>
+
+            <button
+                type="button"
+                class="resume-menu-trigger"
+                aria-label="More options for {{ item['title'] or 'Untitled Resume' }}"
+                aria-expanded="false"
+                data-menu-target="resume-menu-{{ item['id'] }}">
+                <i data-lucide="more-vertical"></i>
+            </button>
+
+            <div class="resume-action-menu" id="resume-menu-{{ item['id'] }}">
+                <button
+                    type="button"
+                    class="resume-delete-menu-item"
+                    data-resume-id="{{ item['id'] }}"
+                    data-resume-title="{{ item['title'] or 'Untitled Resume' }}">
+                    <i data-lucide="trash-2"></i>
+                    Delete resume
+                </button>
+            </div>
+        </div>
+
+    </article>
+    {% endfor %}
+
+</section>
+
+<!-- Delete Resume Confirmation -->
+<div class="delete-modal" id="deleteResumeModal" aria-hidden="true">
+    <div class="delete-modal-backdrop" data-close-delete-modal></div>
+
+    <section class="delete-modal-card" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
+        <button type="button" class="delete-modal-close" aria-label="Close" data-close-delete-modal>
+            <i data-lucide="x"></i>
+        </button>
+
+        <div class="delete-modal-icon">
+            <i data-lucide="trash-2"></i>
+        </div>
+
+        <h2 id="deleteModalTitle">Delete this resume?</h2>
+        <p>
+            You are about to permanently delete
+            <strong id="deleteResumeName">this resume</strong>.
+            This action cannot be undone.
+        </p>
+
+        <form id="deleteResumeForm" method="POST">
+            <div class="delete-modal-actions">
+                <button type="button" class="delete-cancel-btn" data-close-delete-modal>
+                    Cancel
+                </button>
+                <button type="submit" class="delete-confirm-btn">
+                    <i data-lucide="trash-2"></i>
+                    Delete Resume
+                </button>
+            </div>
+        </form>
+    </section>
+</div>
+
+{% else %}
+
+<section class="empty-state-card">
+    <div class="empty-icon">📄</div>
+    <h2>No resumes yet</h2>
+    <p>Create your first ATS-friendly resume to get started with Novus.</p>
+    <a href="/resume/new" class="btn btn-primary">Create Resume</a>
+</section>
+
+{% endif %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const search = document.getElementById("resumeSearch");
+        const cards = document.querySelectorAll(".resume-list-card");
+        const modal = document.getElementById("deleteResumeModal");
+        const deleteForm = document.getElementById("deleteResumeForm");
+        const deleteName = document.getElementById("deleteResumeName");
+
+        if (search) {
+            search.addEventListener("input", () => {
+                const query = search.value.trim().toLowerCase();
+
+                cards.forEach(card => {
+                    card.style.display = card.dataset.title.includes(query) ? "" : "none";
+                });
+            });
+        }
+
+        document.querySelectorAll(".resume-menu-trigger").forEach(trigger => {
+            trigger.addEventListener("click", event => {
+                event.stopPropagation();
+
+                const targetId = trigger.dataset.menuTarget;
+                const menu = document.getElementById(targetId);
+                const wasOpen = menu?.classList.contains("is-open");
+
+                document.querySelectorAll(".resume-action-menu.is-open").forEach(openMenu => {
+                    openMenu.classList.remove("is-open");
+                });
+                document.querySelectorAll('.resume-menu-trigger[aria-expanded="true"]').forEach(openTrigger => {
+                    openTrigger.setAttribute("aria-expanded", "false");
+                });
+
+                if (menu && !wasOpen) {
+                    menu.classList.add("is-open");
+                    trigger.setAttribute("aria-expanded", "true");
+                }
+            });
+        });
+
+        document.addEventListener("click", () => {
+            document.querySelectorAll(".resume-action-menu.is-open").forEach(menu => {
+                menu.classList.remove("is-open");
+            });
+            document.querySelectorAll('.resume-menu-trigger[aria-expanded="true"]').forEach(trigger => {
+                trigger.setAttribute("aria-expanded", "false");
+            });
+        });
+
+        document.querySelectorAll(".resume-delete-menu-item").forEach(button => {
+            button.addEventListener("click", event => {
+                event.stopPropagation();
+
+                deleteName.textContent = `"${button.dataset.resumeTitle}"`;
+                deleteForm.action = `/resume/${button.dataset.resumeId}/delete`;
+
+                modal.classList.add("is-open");
+                modal.setAttribute("aria-hidden", "false");
+                document.body.classList.add("modal-open");
+            });
+        });
+
+        document.querySelectorAll("[data-close-delete-modal]").forEach(element => {
+            element.addEventListener("click", () => {
+                modal.classList.remove("is-open");
+                modal.setAttribute("aria-hidden", "true");
+                document.body.classList.remove("modal-open");
+            });
+        });
+
+        document.addEventListener("keydown", event => {
+            if (event.key === "Escape" && modal.classList.contains("is-open")) {
+                modal.classList.remove("is-open");
+                modal.setAttribute("aria-hidden", "true");
+                document.body.classList.remove("modal-open");
+            }
+        });
+    });
+</script>
+
+{% endblock %}

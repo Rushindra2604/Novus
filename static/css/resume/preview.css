@@ -1,0 +1,835 @@
+/* ==========================================================
+   NOVUS LIVE RESUME PREVIEW — STABLE, GROWING DOCUMENT
+========================================================== */
+
+.preview-panel {
+    position: static;
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+}
+
+.preview-card {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+    background: #fff;
+    border: 1px solid #e8eaf0;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, .07);
+}
+
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    border-bottom: 1px solid #eceff3;
+    background: #fff;
+    border-radius: 18px 18px 0 0;
+}
+
+.preview-header h2 {
+    margin: 0;
+    color: #111827;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.preview-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 11px;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: #6d4aff;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.resume-paper {
+    width: 100%;
+    min-height: 850px;
+    height: auto;
+    max-height: none;
+    box-sizing: border-box;
+    padding: 34px;
+    background: #fff;
+    overflow: visible;
+    overflow-wrap: anywhere;
+}
+
+.resume-paper-header {
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    text-align: center;
+    border-bottom: 1px solid #ececec;
+}
+
+.resume-paper-header h1 {
+    margin: 0;
+    color: #111827;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.resume-paper-header h2 {
+    margin: 7px 0 0;
+    color: #111827;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.resume-contact,
+.preview-contact,
+.preview-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    margin-top: 10px;
+    color: #4b5563;
+    font-size: 12px;
+}
+
+.preview-contact span,
+.preview-links span,
+.preview-links a {
+    min-width: 0;
+}
+
+.preview-links a,
+.preview-section a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.preview-links a:hover,
+.preview-section a:hover {
+    text-decoration: underline;
+}
+
+.preview-section {
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    max-height: none;
+    margin-bottom: 24px;
+    overflow: visible;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.preview-section:last-child {
+    margin-bottom: 0;
+}
+
+.preview-section h3 {
+    margin: 0 0 12px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ececec;
+    color: #374151;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.preview-section p,
+.preview-section li {
+    color: #374151;
+    font-size: 12px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.preview-section p {
+    margin: 0 0 8px;
+}
+
+#previewSummary {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.preview-section ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.preview-section li {
+    margin-bottom: 5px;
+    line-height: 1.55;
+}
+
+.preview-section strong {
+    color: #111827;
+    font-weight: 600;
+}
+
+.empty-preview {
+    color: #9ca3af !important;
+    font-style: italic;
+}
+
+/* Education */
+.preview-education-item {
+    margin-bottom: 18px;
+}
+
+.preview-education-item:last-child {
+    margin-bottom: 0;
+}
+
+.preview-education-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 5px;
+}
+
+.preview-education-header h4,
+.preview-project-title,
+.preview-certification h4 {
+    margin: 0;
+    color: #111827;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.preview-years,
+.preview-duration,
+.preview-certification-date {
+    flex-shrink: 0;
+    color: #4b5563;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: normal;
+}
+
+.preview-institution,
+.preview-score,
+.preview-certification-provider {
+    margin: 3px 0;
+    color: #374151;
+    font-size: 12px;
+}
+
+.preview-score {
+    color: #6b7280;
+    font-size: 11px;
+}
+
+/* Skills */
+.skills-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.preview-skill-line {
+    margin: 0;
+}
+
+.skill-pill-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.skill-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: #f3f4f6;
+    color: #374151;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* Projects */
+.preview-project {
+    margin-bottom: 20px;
+}
+
+.preview-project:last-child {
+    margin-bottom: 0;
+}
+
+.preview-project-title {
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.preview-project-tech {
+    margin-bottom: 8px !important;
+}
+
+.preview-project-bullets {
+    margin: 0 0 10px 18px !important;
+    padding: 0;
+}
+
+.preview-project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 8px;
+}
+
+.preview-project-links a {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* Experience */
+.preview-experience-item {
+    margin-bottom: 20px;
+}
+
+.preview-experience-item:last-child {
+    margin-bottom: 0;
+}
+
+.preview-experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 5px;
+}
+
+.preview-experience-meta {
+    margin-top: 3px;
+    color: #4b5563;
+    font-size: 11px;
+}
+
+.preview-experience-bullets {
+    margin: 8px 0 0 18px !important;
+    padding: 0;
+}
+
+/* Certifications + optional sections */
+.preview-certification {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 14px;
+}
+
+.preview-certification:last-child {
+    margin-bottom: 0;
+}
+
+.preview-certification-item {
+    margin-bottom: 7px;
+}
+
+.preview-certification-item:last-child {
+    margin-bottom: 0;
+}
+
+.additional-preview-content {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.additional-preview-content p {
+    margin-bottom: 10px;
+}
+
+.no-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+@media print {
+
+    .preview-panel,
+    .preview-card {
+        position: static;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .resume-paper {
+        min-height: auto;
+        padding: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .resume-paper {
+        padding: 24px;
+    }
+
+    .preview-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .preview-education-header,
+    .preview-experience-header,
+    .preview-certification {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .preview-project-links {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+/* ==========================================================
+   NOVUS LIVE PREVIEW — INTERNAL SCROLL
+   The preview scrolls independently when the cursor is over it.
+   The scrollbar itself stays completely hidden.
+========================================================== */
+
+.studio-preview .preview-panel,
+.preview-panel {
+    height: calc(100vh - 112px);
+    max-height: calc(100vh - 112px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.studio-preview .preview-panel::-webkit-scrollbar,
+.preview-panel::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+/* Keep the preview heading visible while its resume content scrolls. */
+.studio-preview .preview-header,
+.preview-header {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+/* Let the resume itself grow naturally inside the scroll area. */
+.studio-preview .preview-card,
+.preview-card {
+    min-height: 100%;
+    overflow: visible;
+}
+
+.studio-preview .resume-paper,
+.resume-paper {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+}
+
+@media (max-width: 1040px) {
+
+    .studio-preview .preview-panel,
+    .preview-panel {
+        height: auto;
+        max-height: none;
+        overflow: visible;
+        overscroll-behavior: auto;
+    }
+}
+
+/* ==========================================================
+   NOVUS - PHASE 9A
+   FULL RESUME PREVIEW
+========================================================== */
+
+body.preview-modal-open {
+    overflow: hidden;
+}
+
+
+/* OVERLAY */
+
+.resume-preview-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity .22s ease,
+        visibility .22s ease;
+
+}
+
+
+.resume-preview-overlay.is-open {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+}
+
+
+/* BACKDROP */
+
+.resume-preview-backdrop {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(15, 23, 42, .62);
+
+    backdrop-filter: blur(5px);
+
+}
+
+
+/* WINDOW */
+
+.resume-preview-window {
+
+    position: relative;
+
+    z-index: 1;
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    background: #f1f3f7;
+
+    transform: translateY(12px);
+
+    transition: transform .22s ease;
+
+}
+
+
+.resume-preview-overlay.is-open .resume-preview-window {
+
+    transform: translateY(0);
+
+}
+
+
+/* TOOLBAR */
+
+.resume-preview-toolbar {
+
+    flex: 0 0 auto;
+
+    min-height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 12px 24px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    box-shadow:
+        0 3px 14px rgba(15, 23, 42, .06);
+
+}
+
+
+.resume-preview-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+}
+
+
+.resume-preview-brand-icon {
+
+    width: 38px;
+
+    height: 38px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 11px;
+
+    background: #f0ebff;
+
+    color: #6d4aff;
+
+}
+
+
+.resume-preview-brand-icon svg {
+
+    width: 19px;
+
+    height: 19px;
+
+}
+
+
+.resume-preview-brand strong {
+
+    display: block;
+
+    color: #111827;
+
+    font-size: 16px;
+
+}
+
+
+.resume-preview-brand div span {
+
+    display: block;
+
+    margin-top: 2px;
+
+    color: #6b7280;
+
+    font-size: 12px;
+
+}
+
+
+/* RIGHT SIDE */
+
+.resume-preview-toolbar-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.resume-preview-status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 7px 11px;
+
+    border-radius: 999px;
+
+    background: #f0fdf4;
+
+    color: #15803d;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+}
+
+
+.resume-preview-status-dot {
+
+    width: 7px;
+
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+}
+
+
+/* CLOSE */
+
+.resume-preview-close {
+
+    width: 42px;
+
+    height: 42px;
+
+    display: grid;
+
+    place-items: center;
+
+    border: 1px solid #dfe4eb;
+
+    border-radius: 11px;
+
+    background: #ffffff;
+
+    color: #475569;
+
+    cursor: pointer;
+
+    transition: .18s ease;
+
+}
+
+
+.resume-preview-close:hover {
+
+    background: #f8fafc;
+
+    border-color: #cbd5e1;
+
+    color: #111827;
+
+}
+
+
+.resume-preview-close svg {
+
+    width: 19px;
+
+    height: 19px;
+
+}
+
+
+/* PREVIEW AREA */
+
+.resume-preview-stage {
+
+    flex: 1;
+
+    min-height: 0;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    padding: 34px 24px 50px;
+
+}
+
+
+/* DOCUMENT */
+
+.resume-preview-document {
+
+    width: min(850px, 100%);
+
+    margin: 0 auto;
+
+}
+
+
+.resume-preview-full-document {
+
+    width: 100% !important;
+
+    min-height: 1100px;
+
+    box-sizing: border-box;
+
+    margin: 0 auto;
+
+    background: #ffffff;
+
+    border-radius: 4px;
+
+    box-shadow:
+        0 12px 40px rgba(15, 23, 42, .13);
+
+}
+
+
+/* Make the cloned resume use the existing
+   resume-paper design */
+
+.resume-preview-full-document .resume-paper {
+
+    width: 100%;
+
+    min-height: 1100px;
+
+    box-sizing: border-box;
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .resume-preview-toolbar {
+
+        min-height: 64px;
+
+        padding: 10px 14px;
+
+    }
+
+    .resume-preview-brand div span {
+
+        display: none;
+
+    }
+
+    .resume-preview-status {
+
+        display: none;
+
+    }
+
+    .resume-preview-stage {
+
+        padding: 18px 10px 30px;
+
+    }
+
+    .resume-preview-document {
+
+        width: 100%;
+
+    }
+
+}
